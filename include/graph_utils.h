@@ -21,8 +21,4 @@ struct node {
  */
 pair<int, vector<node>> load_run_from_file(string filePath);
 
-vector<node> generate_random_graph(int nLevels, int maxNodePerLevel);
-
-void save_graph(vector<node> nodes, string outputPath);
-
 void create_node(int label, vector<node> &nodes, map<int, int> &nodePositions);

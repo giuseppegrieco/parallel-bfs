@@ -1,4 +1,35 @@
-#include "graph_utils.h"
+import argparse
+
+def probability(val):
+    x = float(val)
+    if x >= 0 and x <= 1:
+        return x
+    raise ValueError(x)
+
+parser = argparse.ArgumentParser(
+    description='It generates random DAG'
+)
+parser.add_argument(
+    'p', 
+    help='probability of attaching one edge', 
+    type=probability
+)
+parser.add_argument(
+    'outputFile', 
+    help='the path to the output files'
+)
+parser.add_argument(
+    'target, 
+    help='node target',
+    type=int
+)
+args = parser.parse_args()
+
+p = args.probability
+outputFile = args.outputFile
+target = args.target
+
+'''
 
 vector<node> generate_random_graph(int nLevels, int maxNodePerLevel) {
     if(nLevels < 1) {
@@ -38,3 +69,18 @@ vector<node> generate_random_graph(int nLevels, int maxNodePerLevel) {
     }
     return nodes;
 }
+
+void save_graph(vector<node> nodes, string outputPath) {
+    fstream outputFile(outputPath, ios_base::out);
+    for(size_t i = 0; i < nodes.size(); i++) {
+        for(size_t j = 0; j < nodes[i].adj.size(); j++) {
+            string in = to_string(nodes[i].label);
+            string out = to_string(nodes[nodes[i].adj[j]].label);
+            string line = in + "," + out;
+            outputFile << line << endl;
+        }
+    }
+    outputFile.close();
+}
+
+'''

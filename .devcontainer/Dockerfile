@@ -6,6 +6,7 @@ RUN apt update \
     && apt install -y git subversion \
     vim cmake autoconf libreadline-dev \
     software-properties-common \
+    python \
     hwloc emacs
 ### make g++-10 default g++ compiler
 RUN apt -y install g++-10
