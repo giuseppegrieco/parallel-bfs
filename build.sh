@@ -1,1 +1,0 @@
-g++ src/*.cpp -o dist/main -pthread -O3
