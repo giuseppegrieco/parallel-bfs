@@ -25,11 +25,6 @@ int main(int argc, char *argv[]) {
 
     cout << runMode << endl;
 
-    Generates random dag
-
-    vector<node> nodes = generate_random_graph(10, 20);
-    save_graph(nodes, "examples/1.dat");
-
     pair<int, vector<node>> run = load_run_from_file(inputFile);
 
     int target = run.first;
