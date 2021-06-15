@@ -1,4 +1,17 @@
+'''
+This script generates a graph for a bfs search in according to the project format:
+
+targetNode
+startingNode
+i,j for each pair of node connected
+
+The graph is generated according to the Erdos-Renyi model, since it requires to be
+acyclic only the upper triangle part of the adjencency matrix is considered.
+'''
+
 import argparse
+import random
+import time
 
 def probability(val):
     x = float(val)
@@ -7,7 +20,7 @@ def probability(val):
     raise ValueError(x)
 
 parser = argparse.ArgumentParser(
-    description='It generates random DAG'
+    description='It generates random DAG using Erdos-Renyi model'
 )
 parser.add_argument(
     'p', 
@@ -15,72 +28,52 @@ parser.add_argument(
     type=probability
 )
 parser.add_argument(
-    'outputFile', 
-    help='the path to the output files'
+    'numNodes', 
+    help='number of nodes to create',
+    type=int
 )
 parser.add_argument(
-    'target, 
+    'start', 
+    help='starting node',
+    type=int
+)
+parser.add_argument(
+    'target', 
     help='node target',
     type=int
 )
+parser.add_argument(
+    'outputFile', 
+    help='the path to the output files'
+)
+
 args = parser.parse_args()
-
-p = args.probability
-outputFile = args.outputFile
+p = args.p
+numNodes = args.numNodes
+start = args.start
 target = args.target
+outputFile = args.outputFile
 
-'''
+start_time = time.time()
 
-vector<node> generate_random_graph(int nLevels, int maxNodePerLevel) {
-    if(nLevels < 1) {
-        throw invalid_argument("nLevels should be greater than 0");
-    }
-    if(maxNodePerLevel < 1) {
-        throw invalid_argument("maxNodePerLevel should be greater than 0");
-    }
+# Generates an er graph of `numNodes` nodes
+Adj =  [[ 0 for i in range(numNodes)] for j in range(numNodes)]
+for i in range(0, numNodes):
+    for j in range(0, numNodes):
+        # Avoid self-loop
+        if i != j:
+            drawn = random.uniform(0, 1)
+            if p >= drawn:
+                Adj[i][j] = 1
 
-    // Create a map of node's label -> position of the node in vector
-    map<int, int> nodePositions;
+# Get the upper part of the adj matrix of er graph and
+# write the resulting graph in the output file
+f = open(outputFile, 'w')
+f.write(str(target) + '\n')
+f.write(str(start) + '\n')
+for i in range(0, numNodes):
+    for j in range(i, numNodes):
+        if(Adj[i][j] == 1):
+            f.write(str(i) + ',' + str(j) + '\n')
 
-    vector<node> nodes;
-    create_node(0, nodes, nodePositions);
-    
-    vector<int> previous;
-    previous.push_back(0);
-    for(int i = 0; i < nLevels; i++) {
-        vector<int> current;
-        for(int j = 0; j < maxNodePerLevel; j++) {
-            bool toAdd = false;
-            int label = nodes.size();
-            for(size_t k = 0; k < previous.size(); k++) {
-                srand(time(NULL));
-                double p = (double) rand() / RAND_MAX;
-                if(p > 0.5) {
-                    toAdd = true;
-                    create_node(label, nodes, nodePositions);
-                    nodes[previous[k]].adj.push_back(nodePositions[label]);
-                }
-            }
-            if (toAdd) {
-                current.push_back(nodePositions[label]);
-            }
-        }
-        previous = current;
-    }
-    return nodes;
-}
-
-void save_graph(vector<node> nodes, string outputPath) {
-    fstream outputFile(outputPath, ios_base::out);
-    for(size_t i = 0; i < nodes.size(); i++) {
-        for(size_t j = 0; j < nodes[i].adj.size(); j++) {
-            string in = to_string(nodes[i].label);
-            string out = to_string(nodes[nodes[i].adj[j]].label);
-            string line = in + "," + out;
-            outputFile << line << endl;
-        }
-    }
-    outputFile.close();
-}
-
-'''
+print('--- Generation completed in %s  ---' % (time.time() - start_time))
