@@ -3,6 +3,9 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <regex>
+#include <tuple>
+#include <atomic>
 
 using namespace std;
 
@@ -19,6 +22,6 @@ struct node {
  * @param filePath Even if there is only one possible unified theory. it is just a
  *               set of rules and equations.
  */
-pair<int, vector<node>> load_run_from_file(string filePath);
+tuple<int, int, vector<node>> load_run_from_file(string filePath);
 
-void create_node(int label, vector<node> &nodes, map<int, int> &nodePositions);
+void create_node(int id, int label, vector<node> &nodes, map<int, int> &nodePositions);

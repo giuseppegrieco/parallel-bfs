@@ -25,16 +25,3 @@ The project build requires c++17 and FastFlow and uses Makefile:
 
 ## Usage
 Todo: write the usage
-
-
-## Scripts
-Scripts require Python 3.7 or later:
-### `rdag.py`
-It generates random DAG using Erdos-Renyi model.
-
-usage: python `rdag.py` [-h] p numNodes start target outputFile:  
-- `p`: probability of attaching one edge
-- `numNodes`: number of nodes to create
-- `start`: starting node
-- `target`: node target
-- `outputFile`: the path to the output files

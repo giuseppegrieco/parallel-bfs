@@ -23,37 +23,35 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    cout << runMode << endl;
+    cout << "Reading the run from the file." << endl;
+    tuple<int, int, vector<node>> run = load_run_from_file(inputFile);
+    cout << "Run loaded" << endl;
 
-    pair<int, vector<node>> run = load_run_from_file(inputFile);
-
-    int target = run.first;
+    int target = get<0>(run);
+    int startingNode = get<1>(run);
     cout << "Node target: " << target << endl;
-    vector<node> nodes = run.second;
+    vector<node> nodes = get<2>(run);
 
-    bool found = false;
-    utimer u("bfs");
-    switch(runMode) {
-        case 0:
-            cout << "Sequential version" << endl;
-            found = bfs_search_seq(target, nodes);
-            break;
-        case 1:
-            cout << "Thread version" << endl;
-            found = bfs_search_thread(target, nodes, nw);
-            break;
-        case 2:
-            cout << "FastFlow version" << endl;
-            break;
-        default:
-            cerr << "Run mode not supported" << endl;
-            return -1;
+    int occurrences = 0;
+    {
+        utimer u("bfs");
+        switch(runMode) {
+            case 0:
+                cout << "Sequential version" << endl;
+                occurrences = bfs_search_seq(target, startingNode, nodes);
+                break;
+            case 1:
+                cout << "Thread version" << endl;
+                occurrences = bfs_search_thread(target, startingNode, nodes, nw);
+                break;
+            case 2:
+                cout << "FastFlow version" << endl;
+                break;
+            default:
+                cerr << "Run mode not supported" << endl;
+                return -1;
+        }
     }
-    u.stop_timer();
-
-    if(!found) {
-        cout << "Node target not found" << endl;
-    }
-
+    cout << "Occurrences of target label: " << occurrences << endl;
     return 0;
 }

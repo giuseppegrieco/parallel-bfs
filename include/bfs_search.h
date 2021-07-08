@@ -2,10 +2,12 @@
 #include <queue>
 #include <iostream>
 #include <thread>
+#include <deque>
 
 #include "graph_utils.h"
+#include "syque.h"
 
 using namespace std;
 
-bool bfs_search_seq(int target, vector<node> nodes);
-bool bfs_search_thread(int target, vector<node> nodes, int nw);
+int bfs_search_seq(int target, int startingNode, vector<node> nodes);
+int bfs_search_thread(int target, int startingNode, vector<node> nodes, int nw);

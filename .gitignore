@@ -37,3 +37,5 @@ examples
 build
 
 bfs
+
+scripts/__pycache__

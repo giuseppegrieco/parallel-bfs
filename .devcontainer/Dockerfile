@@ -7,6 +7,7 @@ RUN apt update \
     vim cmake autoconf libreadline-dev \
     software-properties-common \
     python \
+    pip \
     hwloc emacs
 ### make g++-10 default g++ compiler
 RUN apt -y install g++-10

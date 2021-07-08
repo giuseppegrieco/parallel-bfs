@@ -18,5 +18,5 @@ private:
 public:
   utimer(const std::string m);
   utimer(const std::string m, long * us);
-  void stop_timer();
+  ~utimer();
 };
