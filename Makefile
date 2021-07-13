@@ -6,58 +6,27 @@ ifndef FF_ROOT
 FF_ROOT		= $(HOME)/fastflow
 endif
 
-CXX ?= g++ -std=c++17 
+CXX = g++ -std=c++17 
+CXXFLAGS = -O3 -Wall
+INCLUDE = -I include/ 
+PTHREAD = -pthread
+FF = -I $(FF_ROOT) 
 
-SRC_PATH = src
-BUILD_PATH = build
-OBJECTS_PATH = $(BUILD_PATH)/objects
+all:
+	mkdir ./build -p
+	@echo "Compiling sequential version"
+	$(CXX) ./src/bfs-sequential.cpp -o ./build/bfs-sequential $(CXXFLAGS) $(INCLUDE)
+	@echo "Compiled ./build/bfs-sequential"
+	@echo "Compiling pthread version"
+	$(CXX) ./src/bfs-pthread.cpp -o ./build/bfs-pthread $(CXXFLAGS) $(INCLUDE) $(PTHREAD)
+	@echo "Compiled ./build/bfs-pthread"
+	@echo "Compiling fastflow version"
+	$(CXX) ./src/bfs-fastflow.cpp -o ./build/bfs-fastflow $(CXXFLAGS) $(INCLUDE) $(FF)
+	@echo "Compiled ./build/bfs-fastflow"
 
-BIN_NAME = bfs
-
-SOURCES = $(shell find $(SRC_PATH) -name '*.cpp' | sort -k 1nr | cut -f2-)
-OBJECTS = $(SOURCES:$(SRC_PATH)/%.cpp=$(OBJECTS_PATH)/%.o)
-DEPS = $(OBJECTS:.o=.d)
-
-COMPILE_FLAGS = -std=c++17 -Wall -O3 -finline-functions -DNDEBUG
-INCLUDES = -I include/ -I /usr/local/include -I $(FF_ROOT) 
-
-# Space-separated pkg-config libraries
-LIBS = 
-
-.PHONY: release
-release: export CXXFLAGS := $(CXXFLAGS) $(COMPILE_FLAGS)
-release: dirs
-	@$(MAKE) all
-
-.PHONY: dirs
-dirs:
-	@echo "Creating directories"
-	@mkdir -p $(dir $(OBJECTS))
-	@mkdir -p $(BUILD_PATH)
 
 .PHONY: clean
-clean:
-	@echo "Deleting $(BIN_NAME) symlink"
-	@$(RM) $(BIN_NAME)
-	@echo "Deleting directories"
-	@$(RM) -r $(OBJECTS_PATH)
-	@$(RM) -r $(BUILD_PATH)
-
-# Executable
-.PHONY: all
-all: $(BUILD_PATH)/$(BIN_NAME)
-	@echo "Making symlink: $(BIN_NAME) -> $<"
-	@$(RM) $(BIN_NAME)
-	@ln -s $(BUILD_PATH)/$(BIN_NAME) $(BIN_NAME)
-
-$(BUILD_PATH)/$(BIN_NAME): $(OBJECTS)
-	@echo "Linking: $@"
-	$(CXX) $(OBJECTS) -o $@ ${LIBS}
-
-# Add dependency files
--include $(DEPS)
-
-# Source file ruless
-$(OBJECTS_PATH)/%.o: $(SRC_PATH)/%.cpp
-	@echo "Compiling: $< -> $@"
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -MP -MMD -c $< -o $@
+clean: 
+	@echo "Deleting build"
+	rm -r ./build
+	@echo "Build deleted"
