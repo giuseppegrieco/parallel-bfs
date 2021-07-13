@@ -9,14 +9,13 @@
 #include <string>
 
 struct task {
-    queue<uint> frontier;
+    deque<uint> frontier;
     bool none = false;
 };
 
 class TaskQueue {
 private:
     std::mutex d_mutex;
-    std::condition_variable d_condition;
     std::deque<task> d_queue;
     task none;
 public:
@@ -44,7 +43,6 @@ public:
             std::unique_lock<std::mutex> lock(this->d_mutex);
             d_queue.push_front(t);
         }
-        this->d_condition.notify_one();
     }
 };
 

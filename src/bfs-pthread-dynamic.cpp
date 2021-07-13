@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
 
         task init;
         visited[startingNode] = true;
-        init.frontier.push(startingNode);
+        init.frontier.push_back(startingNode);
         inputQueue->add(init);
 
         auto worker = [&](uint id, bool master) {
@@ -65,9 +65,9 @@ int main(int argc, char *argv[]) {
             acout() << "Thread " << id << " : " << " started " << endl;
 #endif
             while(todo) {
-        /**
-         * Process current-level tasks
-         */
+            /**
+             * Process current-level tasks
+             */
 #if VERBOSE
                 acout() << "Thread " << id << " : " << "Level " << lv << " started" << endl;
 #endif
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
                      */
                     while(!levelTask.frontier.empty()) {
                         Node<uint> currentNode = g[levelTask.frontier.front()];
-                        levelTask.frontier.pop();
+                        levelTask.frontier.pop_front();
                         localOccurrences += currentNode.first == target;
 
                         for(size_t i = 0; i < currentNode.second.size(); i++) {
@@ -94,7 +94,7 @@ int main(int argc, char *argv[]) {
                                     task empty;
                                     nextLevelTask = empty;
                                 }
-                                nextLevelTask.frontier.push(pos);
+                                nextLevelTask.frontier.push_back(pos);
                             }
                         }
                     }
