@@ -5,7 +5,7 @@ This project contains the coding of three solutions to perform a bfs search on a
 ## Structure
 ```
 ├── ./build
-│   └── contains the compiled files and the executable (.o, .d)
+│   └── contains the compiled files
 ├── ./include
 │   ├── all the headers files (.h)
 ├── ./src
