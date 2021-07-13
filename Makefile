@@ -1,4 +1,3 @@
-
 # 
 # FF_ROOT     pointing to the FastFlow root directory (i.e.
 #             the one containing the ff directory).
@@ -24,7 +23,7 @@ all:
 	$(CXX) ./src/bfs-pthread-dynamic.cpp -o ./build/bfs-pthread-dynamic $(CXXFLAGS) $(INCLUDE) $(PTHREAD)
 	@echo "Compiled ./build/bfs-pthread-dynamic"
 	@echo "Compiling fastflow version"
-	#$(CXX) ./src/bfs-fastflow.cpp -o ./build/bfs-fastflow $(CXXFLAGS) $(INCLUDE) $(FF)
+	$(CXX) ./src/bfs-fastflow.cpp -o ./build/bfs-fastflow $(CXXFLAGS) $(INCLUDE) $(FF)
 	@echo "Compiled ./build/bfs-fastflow"
 
 
