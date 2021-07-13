@@ -20,8 +20,25 @@ The project build requires c++17 and FastFlow and uses Makefile:
 
 ``` bash
 > make
-> ./build/bfs ../examples/0.dat
 ```
 
 ## Usage
-Todo: write the usage
+positional arguments:
+- `inputFile` : string, the path to the graph
+- `startingNodeId` : integer, the id of the from which the bfs will start
+- `labelTarget` : integer, label whose occurrences are to be counted
+- `nw` : integer, the number of workers to use
+- `k` : integer, chunk size
+
+``` bash
+> ./build/bfs-sequential inputFile startingNodeId labelTarget
+```
+``` bash
+> ./build/bfs-pthread-static inputFile startingNodeId labelTarget nw
+```
+``` bash
+> ./build/bfs-pthread-dynamic inputFile startingNodeId labelTarget nw k
+```
+``` bash
+> ./build/bfs-fastflow inputFile startingNodeId labelTarget nw k
+```
