@@ -16,7 +16,7 @@ using namespace std;
 bool todo = true;
 
 int main(int argc, char *argv[]) {
-    if(argc < 6) {
+    if(argc < 5) {
         std::cerr << "Usage: " << argv[0] << " inputFile startingNodeId labelTarget nw k\n";
         std::cerr << "positional arguments:\n";
         std::cerr << "\tinputFile      : string, the path to the graph\n";
