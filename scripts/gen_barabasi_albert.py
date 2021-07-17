@@ -36,8 +36,6 @@ parser.add_argument(
 args = parser.parse_args()
 m = args.m
 numNodes = args.numNodes
-start = args.start
-target = args.target
 outputFile = args.outputFile
 labelMin = args.labelMin
 labelMax = args.labelMax
@@ -50,4 +48,4 @@ start_time = time.time()
 # Generates an er graph of `numNodes` nodes
 G = nx.barabasi_albert_graph(numNodes, m, seed=seed)
 
-save_dag(G, start, target, numNodes, uniform_labels(numNodes, labelMin, labelMax), outputFile)
+save_dag(G, numNodes, uniform_labels(numNodes, labelMin, labelMax), outputFile)

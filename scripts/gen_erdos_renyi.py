@@ -36,8 +36,6 @@ parser.add_argument(
 args = parser.parse_args()
 p = args.p
 numNodes = args.numNodes
-start = args.start
-target = args.target
 outputFile = args.outputFile
 labelMin = args.labelMin
 labelMax = args.labelMax
@@ -48,6 +46,6 @@ if seed != None:
 start_time = time.time()
 
 # Generates an er graph of `numNodes` nodes
-G = nx.erdos_renyi_graph(numNodes, p, directed=True, seed=seed)
+G = nx.fast_gnp_random_graph(numNodes, p, directed=True, seed=seed)
 
-save_dag(G, start, target, numNodes, uniform_labels(numNodes, labelMin, labelMax), outputFile)
+save_dag(G, numNodes, uniform_labels(numNodes, labelMin, labelMax), outputFile)

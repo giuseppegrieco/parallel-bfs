@@ -1,6 +1,7 @@
 #include <iostream>
 #include <random>
-#include <queue>
+#include <deque>
+#include <fstream>
 
 #include "graph.hpp"
 #include "utimer.hpp"
@@ -25,29 +26,48 @@ int main(int argc, char *argv[]) {
     Graph<uint> g = read<uint>(inputFile);
     std::cout << "Graph readed" << endl;
 
+    utimer executionTimer("Main thread");
     uint occurrences = 0;
     {
-        utimer u("bfs");
-
         vector<bool> visited(g.size(), false);
 
-        queue<uint> frontier;
+#if TIMER
+        utimer bfsTimer("Main thread");
+#endif
+        deque<uint> frontier;
         visited[startingNode] = true;
-        frontier.push(startingNode);
-
+        Node<uint> root = g[startingNode];
+        frontier.push_back(startingNode);
+#if TIMER
+        bfsTimer.print("Preparing first frontier", bfsTimer.getElapsedTime());
+        long nodeTime = 0;
+        long nodeCounter = 0;
+#endif
         while(!frontier.empty()) {
+#if TIMER
+            bfsTimer.reset();
+#endif
             Node<uint> currentNode = g[frontier.front()];
-            frontier.pop();
+            frontier.pop_front();
             occurrences += currentNode.first == target;
             for(size_t i = 0; i < currentNode.second.size(); i++) {
                 uint pos = currentNode.second[i];
                 if(!visited[pos])  {
                     visited[pos] = true;
-                    frontier.push(pos);
+                    frontier.push_back(pos);
                 }
             }
+#if TIMER
+            nodeTime += bfsTimer.getElapsedTime();
+            nodeCounter++;
+#endif
         }
+#if TIMER
+        nodeTimer.print("Node time       ", nodeTime);
+        nodeTimer.print("Node time (avg) ", nodeTime / nodeCounter);
+#endif
     }
+    executionTimer.print("BFS", executionTimer.getElapsedTime());
     
     std::cout << "Occurences found: " << occurrences << endl;
 }

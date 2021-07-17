@@ -14,7 +14,7 @@ using namespace std;
 * A node is represtend by a pair <label of type T, adjency list>
 */
 template <class T>
-using Node = pair<T, vector<int>>;
+using Node = pair<T, vector<uint>>;
 
 /**
 * A graph is represtend by a vector of node (of type T)
@@ -42,7 +42,7 @@ Graph<T> read(string filePath) {
 
         // Reads the number of nodes
         getline(inputFile, currentLine);
-        int size = stoi(currentLine);
+        uint size = stoi(currentLine);
         // Preallocate the space
         g.resize(size);
         
@@ -50,8 +50,8 @@ Graph<T> read(string filePath) {
         while(getline(inputFile, currentLine)) {
             smatch matches;
             if(regex_search(currentLine, matches, rgx) && matches.size() == 5) {
-                int in = stoi(matches[1].str());
-                int out = stoi(matches[3].str());
+                uint in = stoi(matches[1].str());
+                uint out = stoi(matches[3].str());
 
                 g[in].first = stoi(matches[2].str());
                 g[out].first = stoi(matches[4].str());

@@ -21,10 +21,9 @@ import argparse
 
 # Get the upper part of the adj matrix of er graph and
 # write the resulting graph in the output file
-def save_dag(G, start, target, numNodes, labels, outputFile):
+def save_dag(G, numNodes, labels, outputFile):
     f = open(outputFile, 'w')
-    f.write(str(target) + '\n')
-    f.write(str(start) + '\n')
+    f.write(str(numNodes) + '\n')
     for i in range(0, numNodes):
         for j in range(i, numNodes):
             if G.has_edge(i, j):
@@ -46,11 +45,6 @@ def parser_base(description):
         type=int
     )
     parser.add_argument(
-        'start', 
-        help='starting node',
-        type=int
-    )
-    parser.add_argument(
         'labelMin', 
         help='labels minimum value',
         type=int
@@ -58,11 +52,6 @@ def parser_base(description):
     parser.add_argument(
         'labelMax', 
         help='labels maximum value',
-        type=int
-    )
-    parser.add_argument(
-        'target', 
-        help='label target',
         type=int
     )
     parser.add_argument(

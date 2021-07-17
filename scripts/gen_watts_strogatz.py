@@ -43,8 +43,6 @@ args = parser.parse_args()
 p = args.p
 k = args.k
 numNodes = args.numNodes
-start = args.start
-target = args.target
 outputFile = args.outputFile
 labelMin = args.labelMin
 labelMax = args.labelMax
@@ -57,4 +55,4 @@ start_time = time.time()
 # Generates an er graph of `numNodes` nodes
 G = nx.watts_strogatz_graph(numNodes, k, p, seed=seed)
 
-save_dag(G, start, target, numNodes, uniform_labels(numNodes, labelMin, labelMax), outputFile)
+save_dag(G, numNodes, uniform_labels(numNodes, labelMin, labelMax), outputFile)

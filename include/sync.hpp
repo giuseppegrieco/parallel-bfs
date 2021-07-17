@@ -8,41 +8,63 @@
 #include <math.h>
 #include <string>
 
-struct task {
-    deque<uint> frontier;
-    bool none = false;
+using Chunk = pair<uint, uint>;
+
+class FeedbackQueue {
+private:
+    vector<uint> *frontier;
+public:
+    FeedbackQueue() {
+        this->frontier = new vector<uint>();
+    }
+
+    vector<uint>* get() {
+        return this->frontier;
+    }
+
+    void add(uint el) {
+        frontier->push_back(el);
+    }
+
+    void clear() {
+        this->frontier = new vector<uint>();
+    }
 };
 
 class TaskQueue {
 private:
-    std::mutex d_mutex;
-    std::deque<task> d_queue;
-    task none;
+    vector<vector<uint>> subfrontier;
+    vector<uint> *frontier;
+    atomic_uint s;
+    uint e;
+    uint k;
+    pair<uint, uint> none;
 public:
-    TaskQueue() {
-        this->none.none = true;
+    TaskQueue(uint k) {
+        this->k = k;
+        this->none.second = 0;
     }
 
-    bool empty() {
-        return this->d_queue.empty();
+    vector<uint>* get() {
+        return frontier;
     }
 
-    task pop() {
-        std::unique_lock<std::mutex> lock(this->d_mutex);
-        if(!this->d_queue.empty()) {
-            task rc(std::move(this->d_queue.back()));
-            this->d_queue.pop_back();
-            return rc;
+    pair<uint, uint> pop() {
+        uint i = s.fetch_add(k);
+        if(i < e) {
+            pair<uint, uint> chunk;
+            chunk.first = i;
+            chunk.second = min(i + k, e);
+            return chunk;
         } else {
-            return this->none;
+            return none;
         }
     }
 
-    void add(task t) {
-        {
-            std::unique_lock<std::mutex> lock(this->d_mutex);
-            d_queue.push_front(t);
-        }
+    void setFrontier(vector<uint> *nextLevel) {
+        frontier = nextLevel;
+        s = 0;
+        e = frontier->size();
     }
 };
 
@@ -61,7 +83,9 @@ public:
     }
 
     void waitMaster() {
-        while(this->counter != 0); 
+        while(this->counter != 0) {
+            this_thread::yield();
+        }
     }
 
     void increment() {

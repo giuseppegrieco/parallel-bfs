@@ -9,10 +9,8 @@ pip install -r requirements.txt
 ## Usage
 ### `common parameters`:
 - `numNodes`: number of nodes to create
-- `start`: starting node
 - `labelMin`: labels minimum value
 - `labelMax`: labels maximum value
-- `target`: label target
 - `outputFile`: the path to the output files
 - `--seed`: seed for the generation of the graph
 ### `gen_erdos_renyi.py`:

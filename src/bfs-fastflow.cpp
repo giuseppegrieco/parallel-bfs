@@ -4,10 +4,14 @@
 #include <queue>
 
 #include "graph.hpp"
+#include "utimer.hpp"
+#include "sync.hpp"
 
 #if VERBOSE
 #include "acout.hpp"
 #endif
+
+using namespace std;
 
 int main(int argc, char *argv[]) {
     if(argc < 6) {
@@ -31,5 +35,10 @@ int main(int argc, char *argv[]) {
     Graph<uint> g = read<uint>(inputFile);
 
     std::cout << "Graph readed" << endl;
+
+    atomic_uint occurrences;
+    occurrences = 0;
+    
+    std::cout << "Occurences found: " << occurrences << endl;
     return 0;
 }
