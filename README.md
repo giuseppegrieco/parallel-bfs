@@ -32,12 +32,9 @@ positional arguments:
 
 ``` bash
 > ./build/bfs-sequential inputFile startingNodeId labelTarget
-```
+``
 ``` bash
-> ./build/bfs-pthread-static inputFile startingNodeId labelTarget nw
-```
-``` bash
-> ./build/bfs-pthread-dynamic inputFile startingNodeId labelTarget nw k
+> ./build/bfs-pthread inputFile startingNodeId labelTarget nw k
 ```
 ``` bash
 > ./build/bfs-fastflow inputFile startingNodeId labelTarget nw k
