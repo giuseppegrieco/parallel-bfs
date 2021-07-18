@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2020.12.17)  13 JUL 2021 12:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2020.12.17)  18 JUL 2021 17:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -302,29 +302,44 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \sift@deathcycles=\count273
 \@vwid@loff=\dimen176
 \@vwid@roff=\dimen177
-)) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+ (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count274
 \l__pdf_internal_box=\box57
 ) (/home/giuseppegrieco/Projects/spm/parallel-bfs/report/main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 10.
-LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -361,7 +376,7 @@ LaTeX Font Info:    ... okay on input line 10.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box58
-Package hyperref Info: Link coloring OFF on input line 10.
+Package hyperref Info: Link coloring OFF on input line 12.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -371,9 +386,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count275
 )
-LaTeX Info: Redefining \ref on input line 10.
-LaTeX Info: Redefining \pageref on input line 10.
-LaTeX Info: Redefining \nameref on input line 10.
+LaTeX Info: Redefining \ref on input line 12.
+LaTeX Info: Redefining \pageref on input line 12.
+LaTeX Info: Redefining \nameref on input line 12.
  (/home/giuseppegrieco/Projects/spm/parallel-bfs/report/main.out) (/home/giuseppegrieco/Projects/spm/parallel-bfs/report/main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -397,10 +412,10 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-<./images/logo.png, id=12, 1204.5pt x 1229.59375pt>
+<./images/logo.png, id=32, 1204.5pt x 1229.59375pt>
 File: ./images/logo.png Graphic file (type png)
 <use ./images/logo.png>
-Package pdftex.def Info: ./images/logo.png  used on input line 29.
+Package pdftex.def Info: ./images/logo.png  used on input line 31.
 (pdftex.def)             Requested size: 84.32361pt x 86.08035pt.
  [1
 
@@ -409,29 +424,33 @@ Package pdftex.def Info: ./images/logo.png  used on input line 29.
 \openout4 = `main.toc'.
 
  [2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 48.
- [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 48.
+Underfull \hbox (badness 10000) in paragraph at lines 49--55
+
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 87.
+[3]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 87.
  (/home/giuseppegrieco/Projects/spm/parallel-bfs/report/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 48.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 48.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 87.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 87.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 92C54088434D4FEACA9DE13351D7FBC1;113.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 48.
+(rerunfilecheck)             Checksum: D6BA4966E62CAFACD28604355F3F5535;436.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 87.
  ) 
 Here is how much of TeX's memory you used:
- 8235 strings out of 480906
- 127070 string characters out of 5910771
- 409544 words of memory out of 5000000
- 23680 multiletter control sequences out of 15000+600000
- 538007 words of font info for 39 fonts, out of 8000000 for 9000
+ 8687 strings out of 480906
+ 132281 string characters out of 5910771
+ 422826 words of memory out of 5000000
+ 24120 multiletter control sequences out of 15000+600000
+ 538342 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 51i,5n,41p,358b,315s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on /home/giuseppegrieco/Projects/spm/parallel-bfs/report/main.pdf (3 pages, 278753 bytes).
+ 51i,5n,41p,358b,316s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on /home/giuseppegrieco/Projects/spm/parallel-bfs/report/main.pdf (3 pages, 267744 bytes).
 PDF statistics:
- 66 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
- 7 named destinations out of 1000 (max. 500000)
- 22 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 108 PDF objects out of 1000 (max. 8388607)
+ 89 compressed objects within 1 object stream
+ 12 named destinations out of 1000 (max. 500000)
+ 62 words of extra memory for PDF output out of 10000 (max. 10000000)
 

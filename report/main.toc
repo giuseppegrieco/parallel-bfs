@@ -1,2 +1,7 @@
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Problem statement}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Proposed solution}{3}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Sequential version}{3}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Parallel version}{3}{subsubsection.1.2.2}%
+\contentsline {section}{\numberline {2}Analysis and measurements}{3}{section.2}%
+\contentsline {section}{\numberline {3}Conclusion}{3}{section.3}%

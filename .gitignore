@@ -33,10 +33,11 @@
 
 .vscode
 
-examples
 build
 
 bfs
+
+examples
 
 scripts/__pycache__
 

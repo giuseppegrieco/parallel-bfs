@@ -33,11 +33,11 @@ public:
   long getElapsedTime() {
     stop = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsed = stop - start;
-    return std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+    return std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count();
   }
 
   void print(string task, long musec) {
-    acout() << message << " : " << task << " computed in " << musec << " microseconds " 
+    acout() << message << " : " << task << " computed in " << musec << " nanoseconds " 
         << std::endl;
   }
 };

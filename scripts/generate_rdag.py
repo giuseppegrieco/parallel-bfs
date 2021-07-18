@@ -18,21 +18,48 @@ __author__ = 'giuseppegrieco'
 
 import random
 import time
+import random
+import argparse
 
 import networkx as nx
 
-from utils import save_dag
-from utils import uniform_labels
-from utils import parser_base
-from utils import probability_type
+def probability_type(val):
+    x = float(val)
+    if x >= 0 and x <= 1:
+        return x
+    raise ValueError(x)
 
-parser = parser_base('It generates random DAG using Erdos-Renyi model')
+parser = argparse.ArgumentParser('It generates random DAG using Erdos-Renyi model')
+parser.add_argument(
+    'numNodes', 
+    help='number of nodes to create',
+    type=int
+)
 parser.add_argument(
     'p', 
     help='probability of attaching one edge', 
     type=probability_type
 )
-
+parser.add_argument(
+    'labelMin', 
+    help='labels minimum value',
+    type=int
+)
+parser.add_argument(
+    'labelMax', 
+    help='labels maximum value',
+    type=int
+)
+parser.add_argument(
+    'outputFile', 
+    help='the path to the output files'
+)
+parser.add_argument(
+    '--seed', 
+    help='seed for the generation of the graph',
+    type=int,
+    default=None
+)
 args = parser.parse_args()
 p = args.p
 numNodes = args.numNodes
@@ -43,9 +70,16 @@ seed = args.seed
 if seed != None:
     seed = random.seed(seed)
 
-start_time = time.time()
-
 # Generates an er graph of `numNodes` nodes
 G = nx.fast_gnp_random_graph(numNodes, p, directed=True, seed=seed)
 
-save_dag(G, numNodes, uniform_labels(numNodes, labelMin, labelMax), outputFile)
+labels = []
+for i in range(0, numNodes):
+    labels.append(str(int(random.uniform(labelMin, labelMax))))
+
+f = open(outputFile, 'w')
+f.write(str(numNodes) + '\n')
+for i in range(0, numNodes):
+    for j in range(i, numNodes):
+        if G.has_edge(i, j):
+            f.write(str(i) + '[' + labels[i] + '],' + str(j) + '[' + labels[j] + ']\n')

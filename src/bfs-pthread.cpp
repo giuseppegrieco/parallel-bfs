@@ -50,33 +50,32 @@ int main(int argc, char *argv[]) {
         }
 
         TaskQueue tasks(k);
-        LevelSynchronization sync(nw + 1);
-        vector<FeedbackQueue> feedbacks(nw);
+        LevelSynchronization sync(nw);
 
         vector<uint> *nextFrontier = new vector<uint>();
         mutex mtx;
 #if TIMER
         preparationTimer.print("1st stage visited array and utilities", preparationTimer.getElapsedTime());
 #endif
-        auto worker = [&](uint id, FeedbackQueue &feedback) {
+        auto worker = [&](uint id, bool master) {
             vector<uint> *frontier;
             uint localOccurrences = 0;
-#if VISITED_TIMER
-            utimer visitedTimer("Worker " + to_string(id));
-            long visitedTime = 0;
-            ulong visitedChecks = 0;
-#endif
-#if NODE_TIMER
-            utimer nodeTimer("Worker " + to_string(id));
-            long nodeTime = 0;
-            ulong nodeCounter = 0;
-#endif
-#if W_TIMER
-            utimer chunkTimer("Worker " + to_string(id));
-#endif
+            vector<uint> localNextFrontier;
             while(!(frontier = tasks.get())->empty()) {
                 pair<uint, uint> chunk;
-                vector<uint> localNextFrontier;
+#if VISITED_TIMER
+                utimer visitedTimer("Worker " + to_string(id));
+                long visitedTime = 0;
+                ulong visitedChecks = 0;
+#endif
+#if W_TIMER
+                utimer chunkTimer("Worker " + to_string(id));
+#endif
+#if NODE_TIMER
+                utimer nodeTimer("Worker " + to_string(id));
+                long nodeTime = 0;
+                ulong nodeCounter = 0;
+#endif
 #if W_TIMER
                 long processTime = 0;
                 uint chunksProcessed = 0;
@@ -91,8 +90,6 @@ int main(int argc, char *argv[]) {
                     if(chunk.second == 0) break;
 #if W_TIMER
                     popTime += chunkTimer.getElapsedTime();
-#endif
-#if W_TIMER
                     chunkTimer.restart();
 #endif
                     for(uint j = chunk.first; j < chunk.second; j++) {
@@ -144,15 +141,23 @@ int main(int argc, char *argv[]) {
 #endif
                 nextFrontier->insert(nextFrontier->end(), localNextFrontier.begin(), localNextFrontier.end());
                 mtx.unlock();
+                localNextFrontier.clear();
 #if W_TIMER
                 chunkTimer.print("Writing time   ", chunkTimer.getElapsedTime());
 #endif
 #if W_TIMER
                 chunkTimer.restart();
 #endif
-                sync.increment();
-                sync.waitMaster();
-                feedback.clear();
+                if(master) {
+                    sync.waitSlaves();
+                    swap(frontier, nextFrontier);
+                    nextFrontier->clear();
+                    tasks.setFrontier(frontier);
+                    sync.reset();
+                } else {
+                    sync.increment();
+                    sync.waitMaster();
+                }
 #if W_TIMER
                 chunkTimer.print("Waiting time   ", chunkTimer.getElapsedTime());
                 chunkTimer.print("Chunks (total) ", processTime);
@@ -164,6 +169,7 @@ int main(int argc, char *argv[]) {
 #if NODE_TIMER
                 nodeTimer.print("Node time       ", nodeTime);
                 nodeTimer.print("Node time (avg) ", nodeTime / nodeCounter);
+                acout() << "Worker " + to_string(id) + " : Node visited    " << nodeCounter << endl;
 #endif
 #if VISITED_TIMER
                 visitedTimer.print("Visited checks       ", visitedTime);
@@ -178,6 +184,9 @@ int main(int argc, char *argv[]) {
 #endif
         vector<uint> *frontier = new vector<uint>();
         Node<uint> root = g[startingNode];
+        inserted[startingNode] = true;
+        visited[startingNode] = true;
+        occurrences += root.first == target;
         for(uint i = 0; i < root.second.size(); i++) {
             frontier->push_back(root.second[i]);
             inserted[root.second[i]] = true;
@@ -185,49 +194,30 @@ int main(int argc, char *argv[]) {
         tasks.setFrontier(frontier);
 #if TIMER
         preparationTimer.print("2st stage, frontier initialization", preparationTimer.getElapsedTime());
-#endif
-
-
-#if TIMER
         preparationTimer.restart();
 #endif
-        vector<thread> pool(nw);
-        for (uint i = 0; i < nw; i++) {
+        vector<thread> pool(nw - 1);
+        for (uint i = 0; i < nw - 1; i++) {
             pool[i] = std::thread(
                 worker, 
                 i,
-                ref(feedbacks[i])
+                false
             );
         }
 #if TIMER
         preparationTimer.print("3st stage, Thread creation ", preparationTimer.getElapsedTime());
-        uint lv = 0;
+#endif
+        worker(nw, true);
+
+#if TIMER
         preparationTimer.restart();
 #endif
-
-        while(!frontier->empty()) {
-            sync.waitSlaves();
-#if TIMER
-            preparationTimer.print("Level " + to_string(lv), preparationTimer.getElapsedTime());
-#endif
-
-#if TIMER
-            preparationTimer.restart();
-#endif
-            swap(frontier, nextFrontier);
-            nextFrontier->clear();
-            tasks.setFrontier(frontier);
-            sync.reset();
-#if TIMER
-            preparationTimer.print("Level " + to_string(lv + 1) + " preperation", preparationTimer.getElapsedTime());    
-            lv++;
-            preparationTimer.restart();
-#endif
-        }
-
-        for (uint i = 0; i < nw; i++) {
+        for (uint i = 0; i < nw - 1; i++) {
             pool[i].join();
         }
+#if TIMER
+        preparationTimer.print("3st stage, Thread join", preparationTimer.getElapsedTime());
+#endif
     }
     executionTimer.print("BFS", executionTimer.getElapsedTime());
     std::cout << "Occurences found: " << occurrences << endl;
