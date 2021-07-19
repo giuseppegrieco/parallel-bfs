@@ -7,10 +7,6 @@
 #include "utimer.hpp"
 #include "sync.hpp"
 
-#if VERBOSE
-#include "acout.hpp"
-#endif
-
 using namespace std;
 
 int main(int argc, char *argv[]) {

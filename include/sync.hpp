@@ -33,7 +33,6 @@ public:
 
 class TaskQueue {
 private:
-    vector<vector<uint>> subfrontier;
     vector<uint> *frontier;
     atomic_uint s;
     uint e;

@@ -20,7 +20,7 @@ all:
 	$(CXX) ./src/bfs-pthread.cpp -o ./build/bfs-pthread $(CXXFLAGS) $(INCLUDE) $(PTHREAD)
 	@echo "Compiled ./build/bfs-pthread"
 	@echo "Compiling fastflow version"
-	$(CXX) ./src/bfs-fastflow.cpp -o ./build/bfs-fastflow $(CXXFLAGS) $(INCLUDE) $(FF)
+	$(CXX) ./src/bfs-fastflow.cpp -o ./build/bfs-fastflow $(CXXFLAGS) $(INCLUDE) $(PTHREAD) $(FF)
 	@echo "Compiled ./build/bfs-fastflow"
 
 I_TIMER:
