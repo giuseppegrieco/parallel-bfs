@@ -10,27 +10,6 @@
 
 using Chunk = pair<uint, uint>;
 
-class FeedbackQueue {
-private:
-    vector<uint> *frontier;
-public:
-    FeedbackQueue() {
-        this->frontier = new vector<uint>();
-    }
-
-    vector<uint>* get() {
-        return this->frontier;
-    }
-
-    void add(uint el) {
-        frontier->push_back(el);
-    }
-
-    void clear() {
-        this->frontier = new vector<uint>();
-    }
-};
-
 class TaskQueue {
 private:
     vector<uint> *frontier;
