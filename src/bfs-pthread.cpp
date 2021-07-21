@@ -169,10 +169,10 @@ int main(int argc, char *argv[]) {
                     chunkTimer.restart();
 #endif
                     sync.increment();
+                    sync.waitMaster();
 #if W_TIMER
                     waitingTimer += chunkTimer.getElapsedTime();
 #endif
-                    sync.waitMaster();
                 }
 #if W_TIMER
                 levelsCounter++;
