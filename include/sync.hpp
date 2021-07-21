@@ -82,9 +82,7 @@ public:
     }
 
     void waitMaster() {
-        while(this->counter != 0) {
-            this_thread::yield();
-        }
+        while(this->counter != 0);
     }
 
     void increment() {

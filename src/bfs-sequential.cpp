@@ -10,7 +10,7 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    if(argc < 6) {
+    if(argc < 4) {
         std::cerr << "Usage: " << argv[0] << " inputFile startingNodeId labelTarget nw k\n";
         std::cerr << "positional arguments:\n";
         std::cerr << "\tinputFile      : string, the path to the graph\n";
@@ -26,8 +26,11 @@ int main(int argc, char *argv[]) {
 
     Graph<uint> g = read<uint>(inputFile);
 
-    std::cout << "Graph readed" << endl;
+    std::cout << "Graph read" << endl;
 
+#if TEST
+    for(uint attempt = 0; attempt < 10; attempt++) {
+#endif
     uint occurrences;
     occurrences = 0;
 
@@ -167,5 +170,8 @@ int main(int argc, char *argv[]) {
         nodeTimer.print("Node time (avg) ", nodeTime / nodeCounter);
 #endif
     std::cout << "Occurences found: " << occurrences << endl;
+#if TEST
+    }
+#endif
     return 0;
 }

@@ -42,12 +42,8 @@ uint processLevel(
             localOccurrences += currentNode.first == target;
             for(size_t i = 0; i < currentNode.second.size(); i++) {
                 uint pos = currentNode.second[i];
-                try {
-                    if(inserted[pos]) {
-                        continue;
-                    }
-                } catch(int e) {
-                    acout() << "ciao" << pos  << endl;
+                if(inserted[pos]) {
+                    continue;
                 }
                 localNextFrontier.push_back(pos);
                 inserted[pos] = true;
@@ -177,8 +173,11 @@ int main(int argc, char *argv[]) {
 
     Graph<uint> g = read<uint>(inputFile);
 
-    std::cout << "Graph readed" << endl;
-
+    std::cout << "Graph read" << endl;
+#if TEST
+    for(uint nw = 2; nw <= 32; nw++) {
+        acout() << "#nw" << nw << endl;
+#endif
     atomic_uint occurrences;
     occurrences = 0;
     utimer executionTimer("Main thread");
@@ -212,5 +211,8 @@ int main(int argc, char *argv[]) {
     }
     executionTimer.print("BFS", executionTimer.getElapsedTime());
     std::cout << "Occurences found: " << occurrences << endl;
+#if TEST
+    }
+#endif
     return 0;
 }

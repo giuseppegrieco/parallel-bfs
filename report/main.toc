@@ -1,13 +1,18 @@
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Problem statement}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.1}Notation}{2}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Preliminary analysis}{3}{subsection.1.2}%
 \contentsline {subsubsection}{\numberline {1.2.1}Data structure}{3}{subsubsection.1.2.1}%
 \contentsline {subsubsection}{\numberline {1.2.2}Sequential version}{3}{subsubsection.1.2.2}%
 \contentsline {section}{\numberline {2}Proposed solution}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Problem Review}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Solution Description}{3}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Analysis and measurements}{3}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Build and execution}{3}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Pthread implementation}{3}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3}Fastflow implementation}{3}{subsubsection.2.3.3}%
-\contentsline {section}{\numberline {3}Conclusion}{3}{section.3}%
+\contentsline {subsection}{\numberline {2.1}Problem Analysis}{4}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Completion time}{4}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Sequential analysis}{5}{subsubsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.2}Solution Description}{5}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}How is it expected to perform?}{6}{subsubsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.3}Analysis and measurements}{7}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Build and execution}{7}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}pthread implementation}{7}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Overhead analysis}{7}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}Fastflow implementation}{7}{subsubsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.4}A real use case}{7}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Conclusion}{10}{section.3}%

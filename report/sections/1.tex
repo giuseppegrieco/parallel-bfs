@@ -1,14 +1,13 @@
 
 \section{Introduction}
-\subsection{Problem statement}
-The bread-first search is an algorithm visiting the graph in amplitude. It starts from a node, 
+The bread-first search is an algorithm visiting a graph in amplitude. It starts from a node, 
 often called the root or source node, and continues visiting all its descendants level
-by level, whereas the $i$-th level will contain all the nodes at a distance $i$ from the root.
+by level, whereas the $i$-th level will contain all the nodes at a distance 
+$i$ from the root.
 For each node visited the algorithm checks its label to count the occurrences of the target label.
-The assumption underlying all the work is that the input to the problem is a direct and 
+The assumption underlying all the work is that the input to the algorithm is a direct and 
 acyclic graph. In addition, for the sake of clarity, the notation used is summarized below:
-\\
-
+\subsection{Notation}
 Let $\mathcal{G} = (V, E)$, $|V| = n$ is the number of node and $|E| = m$ is the number of edges. 
 For all the node $v \in V$:
 \begin{itemize}
@@ -21,31 +20,37 @@ For all the node $v \in V$:
 Using the node-focus notation above,
  it is possible to define general properties for the graph:
 \begin{itemize}
-    \item $\bar{k}$ is the average degree;
-    \item $\bar{d}$ is the average distance;
-    \item $d_{max}$ is the diameter.
+    \item $\bar{k}(G)$ is the average degree;
+    \item $\bar{d}(G)$ is the average distance;
+    \item $\bar{h}(G)$ is the diameter.
 \end{itemize}
-
+In addition, we can define 
+the graph inducted by a node $v$ as the subgraph $G'=(V', E')$ containing all the nodes reachable from v.  
 \subsection{Preliminary analysis}
 \subsubsection{Data structure}
 Before entering in the algorithmic details let's first introduce the data structure used.
-There are many ways to represent a graph among these the main ones are adjacency list and adjacency
+There are many ways to represent a graph; among these the main ones are the adjacency list and the adjacency
 matrix. The choices among them is mainly a matter of the usage of the adjacency information and the 
 expected nature of the graph. As for every node $v$ of the graph, induced by the root, it will be necessary
 to go through each node $u \in \mathcal{N}(v)$, the adjacency list is way more efficient since for each
 node $v$ the listing of $\mathcal{N}(v)$ takes a time proportional to $k_{out}(v)$, which is thus optimal.
-Moreover, if the expected input of the algorithm are "real" graphs than since they are very sparse, the representation as a adjacency list is way 
+Moreover, if the expected input of the algorithm are "real" graphs, since they are very sparse, the representation as a adjacency list is way 
 more efficient in terms of space complexity.
 \\
-In particular the presented version represent a graph $G$ as a vector of nodes.
+In particular, the solution implements a graph $G$ as a vector of nodes.
  The node is a pair, the first component is the label of the node, while the second
  component is the adjacency list containing the indices of the nodes in the graph.
-\subsubsection{Sequential version}
+In addition to mark each node as visited, when needed, a vector of boolean is used
+taking a space complexity of $O(log_2n)$, this vector is called in the report 
+\textit{vector of visits}.
+
+ \subsubsection{Sequential version}
+\label{sub:seq-version}
 The sequential version is a straightforward implementation of the problem
-description. It makes usage of two vector $F$ and $\hat{F}$: the former is the frontier 
+description. It uses two vectors $F$ and $\hat{F}$: the former is the frontier 
 while the latter is used to add new nodes and therefore represents the frontier 
-to be used in the next iteration. At the beginning, the algorithm initializes the frontier
-with the neighborhood of the source node and marks each child as visited. Then it marks the source node 
+to be used in the next iteration. At the beginning, the algorithm initializes the vector of visits,
+ the frontier with the neighborhood of the source node and marks each child as visited. Then it marks the source node 
 as visited and updates occurrences if needed (i.e. if the root has the searched label). After this first phase,
  the algorithm starts the first loop which iterates on each level checking that $F$ is not empty.
  Subsequently, for each level, it goes through each node $v \in F$, updates occurrences if needed and

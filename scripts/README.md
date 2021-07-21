@@ -7,8 +7,7 @@ cd data_collection
 pip install -r requirements.txt
 ```
 ## Usage
-### `common parameters`:
-### `gen_erdos_renyi.py`:
+### `generate_rdag.py`:
 It generates random DAG using Erdos-Renyi model.
 
 usage: python `generate_rdag.py` [-h] [--seed SEED] numNodes p start labelMin labelMax target outputFile:  

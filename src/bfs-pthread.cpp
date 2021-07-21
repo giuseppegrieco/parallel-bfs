@@ -30,8 +30,29 @@ int main(int argc, char *argv[]) {
 
     Graph<uint> g = read<uint>(inputFile);
 
-    std::cout << "Graph readed" << endl;
+    std::cout << "Graph read" << endl;
 
+#if VISITED_TIMER
+    atomic_long visitedTime(0);
+    atomic_ulong visitedChecks(0);
+#endif
+#if NODE_TIMER
+    atomic_long nodeTime(0);
+    atomic_ulong nodeCounter(0);
+#endif
+#if W_TIMER
+    atomic_ulong processTime(0);
+    atomic_uint chunksProcessed(0);
+
+    atomic_ulong popTime(0);
+    atomic_ulong waitingTimer(0);
+
+    atomic_uint levelsCounter(0); 
+#endif
+#if TEST
+    for(uint nw = 2; nw <= 32; nw++) {
+        acout() << "#nw" << nw << endl;
+#endif
     atomic_uint occurrences;
     occurrences = 0;
     utimer executionTimer("Main thread");
@@ -61,22 +82,12 @@ int main(int argc, char *argv[]) {
                 pair<uint, uint> chunk;
 #if VISITED_TIMER
                 utimer visitedTimer("Worker " + to_string(id));
-                long visitedTime = 0;
-                ulong visitedChecks = 0;
 #endif
 #if W_TIMER
                 utimer chunkTimer("Worker " + to_string(id));
 #endif
 #if NODE_TIMER
                 utimer nodeTimer("Worker " + to_string(id));
-                long nodeTime = 0;
-                ulong nodeCounter = 0;
-#endif
-#if W_TIMER
-                long processTime = 0;
-                uint chunksProcessed = 0;
-
-                long popTime = 0;
 #endif
                 while(true) {
 #if W_TIMER
@@ -141,35 +152,30 @@ int main(int argc, char *argv[]) {
 #if W_TIMER
                 chunkTimer.print("Writing time   ", chunkTimer.getElapsedTime());
 #endif
-#if W_TIMER
-                chunkTimer.restart();
-#endif
                 if(master) {
+#if W_TIMER
+                    chunkTimer.restart();
+#endif
                     sync.waitSlaves();
+#if W_TIMER
+                    waitingTimer += chunkTimer.getElapsedTime();
+#endif
                     swap(frontier, nextFrontier);
                     nextFrontier->clear();
                     tasks.setFrontier(frontier);
                     sync.reset();
                 } else {
+#if W_TIMER
+                    chunkTimer.restart();
+#endif
                     sync.increment();
+#if W_TIMER
+                    waitingTimer += chunkTimer.getElapsedTime();
+#endif
                     sync.waitMaster();
                 }
 #if W_TIMER
-                chunkTimer.print("Waiting time   ", chunkTimer.getElapsedTime());
-                chunkTimer.print("Chunks (total) ", processTime);
-                chunkTimer.print("Chunks (avg)   ", processTime / chunksProcessed);
-                chunkTimer.print("Pop (total)    ", popTime);
-                chunkTimer.print("Pop (avg)      ", popTime / chunksProcessed);
-                acout() << "Worker " + to_string(id) << " : The number of chunks processed is " << chunksProcessed << endl;
-#endif
-#if NODE_TIMER
-                nodeTimer.print("Node time       ", nodeTime);
-                nodeTimer.print("Node time (avg) ", nodeTime / nodeCounter);
-                acout() << "Worker " + to_string(id) + " : Node visited    " << nodeCounter << endl;
-#endif
-#if VISITED_TIMER
-                visitedTimer.print("Visited checks       ", visitedTime);
-                visitedTimer.print("Visited checks (avg) ", visitedTime / visitedChecks);
+                levelsCounter++;
 #endif
             }
             occurrences += localOccurrences;
@@ -217,5 +223,24 @@ int main(int argc, char *argv[]) {
     }
     executionTimer.print("BFS", executionTimer.getElapsedTime());
     std::cout << "Occurences found: " << occurrences << endl;
+#if W_TIMER
+    executionTimer.print("Waiting time   ", waitingTimer);
+    executionTimer.print("Waiting time (avg) ", waitingTimer / levelsCounter);
+    executionTimer.print("Chunks (total) ", processTime);
+    executionTimer.print("Chunks (avg)   ", processTime / chunksProcessed);
+    executionTimer.print("Pop (total)    ", popTime);
+    executionTimer.print("Pop (avg)      ", popTime / chunksProcessed);
+#endif
+#if NODE_TIMER
+    executionTimer.print("Node time       ", nodeTime);
+    executionTimer.print("Node time (avg) ", nodeTime / nodeCounter);
+#endif
+#if VISITED_TIMER
+    executionTimer.print("Visited checks       ", visitedTime);
+    executionTimer.print("Visited checks (avg) ", visitedTime / visitedChecks);
+#endif
+#if TEST
+    }
+#endif
     return 0;
 }

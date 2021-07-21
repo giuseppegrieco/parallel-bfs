@@ -11,7 +11,7 @@ This project contains the coding of three solutions to perform a bfs search on a
 ├── ./src
 │   └── all the sources files (.cpp)
 ├── ./scripts
-│   └── utility script for generating random dag and benchmarking (.py)
+│   └── utility script for generating random dag (.py)
 ├── Makefile
 ```
 ## Building
