@@ -10,6 +10,9 @@
 
 using Chunk = pair<uint, uint>;
 
+/**
+ * 
+ */
 class TaskQueue {
 private:
     vector<uint> *frontier;
@@ -46,29 +49,49 @@ public:
     }
 };
 
+/**
+ * 
+ */
 class LevelSynchronization {
-private:
-    uint nworkers;
-    atomic_ulong counter;
 public:
-    LevelSynchronization(uint nworkers) {
-        this->nworkers = nworkers;
-        this->counter = 0;
+    explicit LevelSynchronization(uint nw) : 
+      nw(nw),
+      wCounter(0),
+      threshold(nw), 
+      counter(nw),
+      generation(0) {
     }
     
-    void waitSlaves() {
-        while(this->counter != nworkers - 1); 
-    }
-
-    void waitMaster() {
-        while(this->counter != 0);
-    }
-
-    void increment() {
-        this->counter++;
+    void waitWorkers() {
+        while(this->wCounter != nw - 1);
     }
 
     void reset() {
-        this->counter = 0;
+        this->wCounter = 0;
     }
+
+    void increment() {
+        this->wCounter++;
+    }
+
+    void wait() {
+        std::unique_lock<std::mutex> lck{mtx};
+        auto gen = generation;
+        if (!--counter) {
+            generation++;
+            counter = nw;
+            cv.notify_all();
+        } else {
+            cv.wait(lck, [this, gen] { return gen != generation; });
+        }
+    }
+
+private:
+    std::mutex mtx;
+    std::condition_variable cv;
+    uint nw;
+    atomic_uint wCounter;
+    uint threshold;
+    uint counter;
+    uint generation;
 };

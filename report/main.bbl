@@ -1,0 +1,69 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ynt/global//global/global}
+    \entry{PhysRevE.71.036113}{article}{}
+      \name{author}{2}{}{%
+        {{hash=38c2227999207358c4751d4d201d7afd}{%
+           family={Batagelj},
+           familyi={B\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod}}}%
+        {{hash=392b457d9bac1ed69366176e7857d7e9}{%
+           family={Brandes},
+           familyi={B\bibinitperiod},
+           given={Ulrik},
+           giveni={U\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {American Physical Society}%
+      }
+      \strng{namehash}{8ba02f79f8c50e773b9bdc8968fd59a1}
+      \strng{fullhash}{8ba02f79f8c50e773b9bdc8968fd59a1}
+      \strng{bibnamehash}{8ba02f79f8c50e773b9bdc8968fd59a1}
+      \strng{authorbibnamehash}{8ba02f79f8c50e773b9bdc8968fd59a1}
+      \strng{authornamehash}{8ba02f79f8c50e773b9bdc8968fd59a1}
+      \strng{authorfullhash}{8ba02f79f8c50e773b9bdc8968fd59a1}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{3}
+      \field{journaltitle}{Phys. Rev. E}
+      \field{month}{3}
+      \field{title}{Efficient generation of large random networks}
+      \field{volume}{71}
+      \field{year}{2005}
+      \field{pages}{036113}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1103/PhysRevE.71.036113
+      \endverb
+      \verb{urlraw}
+      \verb https://link.aps.org/doi/10.1103/PhysRevE.71.036113
+      \endverb
+      \verb{url}
+      \verb https://link.aps.org/doi/10.1103/PhysRevE.71.036113
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

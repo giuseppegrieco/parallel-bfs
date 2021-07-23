@@ -14,6 +14,12 @@
 
 \selectcolormodel{gray}
 
+\usepackage[
+backend=biber,
+sorting=ynt
+]{biblatex}
+\addbibresource{main.bib}
+
 \begin{document}
 \vspace*{\fill}
 \begin{center}
@@ -43,12 +49,20 @@
     {\large{July, 2021}}
 \end{center}
 \vspace*{\fill}
+\thispagestyle{empty}
 \newpage
 
 \tableofcontents
+\thispagestyle{empty}
+\newpage
+\setcounter{page}{1}
 
 \input{sections/1.tex}
 \input{sections/2.tex}
 \input{sections/3.tex}
+
+\FloatBarrier
+\newpage
+\printbibliography
 
 \end{document}

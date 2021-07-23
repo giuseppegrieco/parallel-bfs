@@ -1,18 +1,43 @@
-\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Notation}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Preliminary analysis}{3}{subsection.1.2}%
-\contentsline {subsubsection}{\numberline {1.2.1}Data structure}{3}{subsubsection.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.2.2}Sequential version}{3}{subsubsection.1.2.2}%
-\contentsline {section}{\numberline {2}Proposed solution}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Problem Analysis}{4}{subsection.2.1}%
-\contentsline {subsubsection}{\numberline {2.1.1}Completion time}{4}{subsubsection.2.1.1}%
-\contentsline {subsubsection}{\numberline {2.1.2}Sequential analysis}{5}{subsubsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.2}Solution Description}{5}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}How is it expected to perform?}{6}{subsubsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.3}Analysis and measurements}{7}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Build and execution}{7}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}pthread implementation}{7}{subsubsection.2.3.2}%
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.1}Notation}{1}{subsection.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.2}Preliminary analysis}{1}{subsection.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {1.2.1}Data structure}{1}{subsubsection.1.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {1.2.2}Sequential version}{2}{subsubsection.1.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Proposed solution}{2}{section.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.1}Problem Analysis}{2}{subsection.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.1.1}Completion time}{2}{subsubsection.2.1.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.1.2}Sequential analysis}{4}{subsubsection.2.1.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2}Solution Description}{4}{subsection.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.2.1}Local next frontier}{5}{subsubsection.2.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.2.2}Expected performance}{5}{subsubsection.2.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.2.3}The influence of chunksize}{6}{subsubsection.2.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3}Analysis and measurements}{6}{subsection.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.3.1}Build and execution}{6}{subsubsection.2.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.3.2}pthread implementation}{6}{subsubsection.2.3.2}%
+\defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.3.3}Overhead analysis}{7}{subsubsection.2.3.3}%
+\defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {2.3.4}Fastflow implementation}{7}{subsubsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.4}A real use case}{7}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Conclusion}{10}{section.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {2.3.5}Results}{7}{subsubsection.2.3.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.4}A real use case}{9}{subsection.2.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Conclusion}{9}{section.3}%

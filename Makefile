@@ -26,37 +26,37 @@ all:
 TEST:
 	mkdir ./build -p
 	@echo "Compiling sequential version"
-	$(CXX) ./src/bfs-sequential.cpp -o ./build/bfs-sequential-test $(CXXFLAGS) $(INCLUDE) -DTEST
+	$(CXX) ./src/bfs-sequential-test.cpp -o ./build/bfs-sequential-test $(CXXFLAGS) $(INCLUDE) -DTEST
 	@echo "Compiled ./build/bfs-sequential-test"
 	@echo "Compiling pthread version"
-	$(CXX) ./src/bfs-pthread.cpp -o ./build/bfs-pthread-test $(CXXFLAGS) $(INCLUDE) $(PTHREAD) -DTEST
+	$(CXX) ./src/bfs-pthread-test.cpp -o ./build/bfs-pthread-test $(CXXFLAGS) $(INCLUDE) $(PTHREAD) -DTEST
 	@echo "Compiled ./build/bfs-pthread-test"
 	@echo "Compiling fastflow version"
-	$(CXX) ./src/bfs-fastflow.cpp -o ./build/bfs-fastflow-test $(CXXFLAGS) $(INCLUDE) $(PTHREAD) $(FF) -DTEST
+	$(CXX) ./src/bfs-fastflow-test.cpp -o ./build/bfs-fastflow-test $(CXXFLAGS) $(INCLUDE) $(PTHREAD) $(FF) -DTEST
 	@echo "Compiled ./build/bfs-fastflow-test"
 
 I_TIMER:
 	@echo "Compiling sequential version with DI_TIMER"
-	$(CXX) ./src/bfs-sequential.cpp -o ./build/bfs-sequential-i-timer $(CXXFLAGS) $(INCLUDE) -DI_TIMER -DTEST
+	$(CXX) ./src/bfs-sequential-test.cpp -o ./build/bfs-sequential-i-timer $(CXXFLAGS) $(INCLUDE) -DI_TIMER -DTEST
 	@echo "Compiled ./build/bfs-sequential-i-timer"
 TIMER:
 	@echo "Compiling sequential version with DTIMER"
-	$(CXX) ./src/bfs-sequential.cpp -o ./build/bfs-sequential-timer $(CXXFLAGS) $(INCLUDE) -DTIMER -DTEST
+	$(CXX) ./src/bfs-sequential-test.cpp -o ./build/bfs-sequential-timer $(CXXFLAGS) $(INCLUDE) -DTIMER -DTEST
 	@echo "Compiled ./build/bfs-sequential-timer"
 	@echo "Compiling pthread version with -DTIMER"
-	$(CXX) ./src/bfs-pthread.cpp -o ./build/bfs-pthread-timer $(CXXFLAGS) $(INCLUDE) $(PTHREAD) -DTIMER -DTEST
+	$(CXX) ./src/bfs-pthread-test.cpp -o ./build/bfs-pthread-timer $(CXXFLAGS) $(INCLUDE) $(PTHREAD) -DTIMER -DTEST
 	@echo "Compiled ./build/bfs-pthread-timer"
 W_TIMER:
 	@echo "Compiling pthread version with -DW_TIMER"
-	$(CXX) ./src/bfs-pthread.cpp -o ./build/bfs-pthread-w-timer $(CXXFLAGS) $(INCLUDE) $(PTHREAD) -DW_TIMER -DTEST
+	$(CXX) ./src/bfs-pthread-test.cpp -o ./build/bfs-pthread-w-timer $(CXXFLAGS) $(INCLUDE) $(PTHREAD) -DW_TIMER -DTEST
 	@echo "Compiled ./build/bfs-pthread-w-timer"
 NODE_TIMER:	
 	@echo "Compiling pthread version with -DNODE_TIMER"
-	$(CXX) ./src/bfs-pthread.cpp -o ./build/bfs-pthread-node-timer $(CXXFLAGS) $(INCLUDE) $(PTHREAD) -DNODE_TIMER -DTEST
+	$(CXX) ./src/bfs-pthread-test.cpp -o ./build/bfs-pthread-node-timer $(CXXFLAGS) $(INCLUDE) $(PTHREAD) -DNODE_TIMER -DTEST
 	@echo "Compiled ./build/bfs-pthread-node-timer"
 VISITED_TIMER:
 	@echo "Compiling pthread version with -DVISITED_TIMER"
-	$(CXX) ./src/bfs-pthread.cpp -o ./build/bfs-pthread-visited-timer $(CXXFLAGS) $(INCLUDE) $(PTHREAD) -DVISITED_TIMER -DTEST
+	$(CXX) ./src/bfs-pthread-test.cpp -o ./build/bfs-pthread-visited-timer $(CXXFLAGS) $(INCLUDE) $(PTHREAD) -DVISITED_TIMER -DTEST
 	@echo "Compiled ./build/bfs-pthread-visited-timer"
 
 .PHONY: clean

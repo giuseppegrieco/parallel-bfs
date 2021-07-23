@@ -36,7 +36,7 @@ public:
     return std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count();
   }
 
-  void print(string task, long musec) {
+  void print(std::string task, long musec) {
     acout() << message << " : " << task << " computed in " << musec << " nanoseconds " 
         << std::endl;
   }

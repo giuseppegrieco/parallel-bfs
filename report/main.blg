@@ -1,0 +1,17 @@
+[0] Config.pm:312> INFO - This is Biber 2.15
+[0] Config.pm:315> INFO - Logfile is 'main.blg'
+[60] biber:330> INFO - === Fri Jul 23, 2021, 01:44:43
+[72] Biber.pm:415> INFO - Reading 'main.bcf'
+[126] Biber.pm:952> INFO - Found 1 citekeys in bib section 0
+[137] Biber.pm:4334> INFO - Processing section 0
+[148] Biber.pm:4523> INFO - Looking for bibtex format file 'main.bib' for section 0
+[149] bibtex.pm:1682> INFO - LaTeX decoding ...
+[151] bibtex.pm:1494> INFO - Found BibTeX data source 'main.bib'
+[168] Utils.pm:384> WARN - month field 'Mar' in entry 'PhysRevE.71.036113' is not an integer - this will probably not sort properly.
+[177] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[178] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[178] Biber.pm:4162> INFO - Sorting list 'ynt/global//global/global' of type 'entry' with template 'ynt' and locale 'en-US'
+[178] Biber.pm:4168> INFO - No sort tailoring available for locale 'en-US'
+[183] bbl.pm:651> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[184] bbl.pm:754> INFO - Output to main.bbl
+[184] Biber.pm:128> INFO - WARNINGS: 1
