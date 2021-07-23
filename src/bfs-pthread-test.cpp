@@ -1,3 +1,22 @@
+/**
+ * Performs a parallel breadth-first search using pthread.
+ * 
+ * It takes 5 positional arguments:
+ *  - inputFile      : the path to the graph
+ *  - startingNodeId : integer, the id of the from which the bfs will start
+ *  - labelTarget    : integer, label whose occurrences are to be counted
+ *  - nw             : integer, the number of workers to use
+ *  - k              : integer, chunk size
+ * 
+ * NOTE: this file provides different utilities for testing:
+ *  - compiling with -DTEST repeat the bfs for each nw in the range [2, 32]
+ *  - compiling with -DTIMER collects different times and print them at the end
+ * 
+ * @file    bfs-pthread-test.cpp
+ * @author  Giuseppe Grieco
+ * @version 1.0 22/06/21
+ */
+
 #include <iostream>
 #include <atomic>
 #include <thread>

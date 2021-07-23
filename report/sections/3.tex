@@ -1,2 +1,8 @@
 \section{Conclusion}
-TODO: scrivere
+The problem of BFS in parallel is very fascinating because the task itself looks easy, but considering the fact that it is strongly dependent on the input, is non trivial to design a solution that in general achieves good performances. Graphs, as it is known, have many statistical and topological properties, and an accurate analysis requires a lot of effort. The work presented here tries to analyze the performance of the proposed parallel solutions by varying some of the main properties of the graphs. The work focused more on some types of graphs, exposing reasoning  specifically on Erdos-Renyi graphs and real networks.
+\\
+In conclusion, the proposed solution achieves fair performance provided that we find sufficiently large frontiers and that the nodes of the next frontier are equally distributed in the neighborhoods of the current one. Two possible improvements can be applied: 
+\begin{enumerate}
+    \item The first one, is to handle the possibility that some frontiers may be very small, i`ntroducing a threshold on the number of nodes in the frontier under which the sequential version is used. 
+    \item Another possible improvement to mitigate the problem of the distribution of nodes of the next frontier in the neighborhoods is the introduction of the concept of partial visit of a node. A simple way to implement it is to check at the time of insertion into the frontier how many neighbors the node has: if the number is above a certain threshold its visit is split into multiple chunks.
+\end{enumerate}

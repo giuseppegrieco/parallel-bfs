@@ -346,7 +346,6 @@ int main(int argc, char *argv[]) {
          *      2. Setup the master-worker initializing both
          */
 
-        
         // 1.1 The vector of visits
         vector<bool> inserted(g.size(), false);
         vector<atomic_bool> visited(g.size());

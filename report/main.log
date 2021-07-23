@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2020.12.17)  23 JUL 2021 01:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2020.12.17)  23 JUL 2021 17:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -696,7 +696,7 @@ Package pdftex.def Info: ./images/logo.png  used on input line 42.
  [2] (/home/giuseppegrieco/Projects/spm/parallel-bfs/report/sections/1.texpdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.62 
+l.61 
       [1]) (/home/giuseppegrieco/Projects/spm/parallel-bfs/report/sections/2.texpdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
@@ -707,56 +707,70 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--67
  []
 
 [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 174--187
+Underfull \hbox (badness 10000) in paragraph at lines 176--187
 
  []
 
 [5] [6]
-<plots/fastflow_performance_02_time.pdf, id=193, 462.52798pt x 346.89601pt>
-File: plots/fastflow_performance_02_time.pdf Graphic file (type pdf)
-<use plots/fastflow_performance_02_time.pdf>
-Package pdftex.def Info: plots/fastflow_performance_02_time.pdf  used on input line 244.
+<plots/level-sync.pdf, id=192, 462.52798pt x 346.89601pt>
+File: plots/level-sync.pdf Graphic file (type pdf)
+<use plots/level-sync.pdf>
+Package pdftex.def Info: plots/level-sync.pdf  used on input line 259.
 (pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
-<plots/fastflow_speedup_02_time.pdf, id=194, 462.52798pt x 346.89601pt>
-File: plots/fastflow_speedup_02_time.pdf Graphic file (type pdf)
-<use plots/fastflow_speedup_02_time.pdf>
-Package pdftex.def Info: plots/fastflow_speedup_02_time.pdf  used on input line 247.
-(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
-<plots/fastflow_performance_04_time.pdf, id=195, 462.52798pt x 346.89601pt>
-File: plots/fastflow_performance_04_time.pdf Graphic file (type pdf)
-<use plots/fastflow_performance_04_time.pdf>
-Package pdftex.def Info: plots/fastflow_performance_04_time.pdf  used on input line 254.
-(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
-<plots/fastflow_speedup_04_time.pdf, id=196, 462.52798pt x 346.89601pt>
-File: plots/fastflow_speedup_04_time.pdf Graphic file (type pdf)
-<use plots/fastflow_speedup_04_time.pdf>
-Package pdftex.def Info: plots/fastflow_speedup_04_time.pdf  used on input line 257.
-(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
-<plots/fastflow_performance_08_time.pdf, id=197, 462.52798pt x 346.89601pt>
-File: plots/fastflow_performance_08_time.pdf Graphic file (type pdf)
-<use plots/fastflow_performance_08_time.pdf>
-Package pdftex.def Info: plots/fastflow_performance_08_time.pdf  used on input line 265.
-(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
-<plots/fastflow_speedup_08_time.pdf, id=198, 462.52798pt x 346.89601pt>
-File: plots/fastflow_speedup_08_time.pdf Graphic file (type pdf)
-<use plots/fastflow_speedup_08_time.pdf>
-Package pdftex.def Info: plots/fastflow_speedup_08_time.pdf  used on input line 268.
-(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
-<plots/fastflow_performance_002_time.pdf, id=202, 462.52798pt x 346.89601pt>
-File: plots/fastflow_performance_002_time.pdf Graphic file (type pdf)
-<use plots/fastflow_performance_002_time.pdf>
-Package pdftex.def Info: plots/fastflow_performance_002_time.pdf  used on input line 279.
-(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
-<plots/fastflow_speedup_002_time.pdf, id=203, 462.52798pt x 346.89601pt>
-File: plots/fastflow_speedup_002_time.pdf Graphic file (type pdf)
-<use plots/fastflow_speedup_002_time.pdf>
-Package pdftex.def Info: plots/fastflow_speedup_002_time.pdf  used on input line 282.
+<plots/lock-wait.pdf, id=193, 462.52798pt x 346.89601pt>
+File: plots/lock-wait.pdf Graphic file (type pdf)
+<use plots/lock-wait.pdf>
+Package pdftex.def Info: plots/lock-wait.pdf  used on input line 264.
 (pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
  [7]
+<plots/fastflow_performance_02_time.pdf, id=207, 462.52798pt x 346.89601pt>
+File: plots/fastflow_performance_02_time.pdf Graphic file (type pdf)
+<use plots/fastflow_performance_02_time.pdf>
+Package pdftex.def Info: plots/fastflow_performance_02_time.pdf  used on input line 282.
+(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
+<plots/fastflow_speedup_02_time.pdf, id=208, 462.52798pt x 346.89601pt>
+File: plots/fastflow_speedup_02_time.pdf Graphic file (type pdf)
+<use plots/fastflow_speedup_02_time.pdf>
+Package pdftex.def Info: plots/fastflow_speedup_02_time.pdf  used on input line 285.
+(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
+<plots/fastflow_performance_04_time.pdf, id=209, 462.52798pt x 346.89601pt>
+File: plots/fastflow_performance_04_time.pdf Graphic file (type pdf)
+<use plots/fastflow_performance_04_time.pdf>
+Package pdftex.def Info: plots/fastflow_performance_04_time.pdf  used on input line 292.
+(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
+<plots/fastflow_speedup_04_time.pdf, id=210, 462.52798pt x 346.89601pt>
+File: plots/fastflow_speedup_04_time.pdf Graphic file (type pdf)
+<use plots/fastflow_speedup_04_time.pdf>
+Package pdftex.def Info: plots/fastflow_speedup_04_time.pdf  used on input line 295.
+(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
+<plots/fastflow_performance_08_time.pdf, id=211, 462.52798pt x 346.89601pt>
+File: plots/fastflow_performance_08_time.pdf Graphic file (type pdf)
+<use plots/fastflow_performance_08_time.pdf>
+Package pdftex.def Info: plots/fastflow_performance_08_time.pdf  used on input line 303.
+(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
+<plots/fastflow_speedup_08_time.pdf, id=212, 462.52798pt x 346.89601pt>
+File: plots/fastflow_speedup_08_time.pdf Graphic file (type pdf)
+<use plots/fastflow_speedup_08_time.pdf>
+Package pdftex.def Info: plots/fastflow_speedup_08_time.pdf  used on input line 306.
+(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
+<plots/fastflow_performance_002_time.pdf, id=216, 462.52798pt x 346.89601pt>
+File: plots/fastflow_performance_002_time.pdf Graphic file (type pdf)
+<use plots/fastflow_performance_002_time.pdf>
+Package pdftex.def Info: plots/fastflow_performance_002_time.pdf  used on input line 317.
+(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
+<plots/fastflow_speedup_002_time.pdf, id=217, 462.52798pt x 346.89601pt>
+File: plots/fastflow_speedup_002_time.pdf Graphic file (type pdf)
+<use plots/fastflow_speedup_002_time.pdf>
+Package pdftex.def Info: plots/fastflow_speedup_002_time.pdf  used on input line 320.
+(pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8 </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_performance_02_time.pdf> </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_speedup_02_time.pdf
+[8 </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/level-sync.pdf> </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/lock-wait.pdf
+
+pdfTeX warning: pdflatex (file /home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/lock-wait.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>] [9 </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_performance_02_time.pdf> </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_speedup_02_time.pdf
 
 pdfTeX warning: pdflatex (file /home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_speedup_02_time.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_performance_04_time.pdf
@@ -772,17 +786,17 @@ pdfTeX warning: pdflatex (file /home/giuseppegrieco/Projects/spm/parallel-bfs/re
 
 pdfTeX warning: pdflatex (file /home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_speedup_08_time.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 >]
-<plots/fastflow_performance_real_time.pdf, id=424, 462.52798pt x 346.89601pt>
+<plots/fastflow_performance_real_time.pdf, id=506, 462.52798pt x 346.89601pt>
 File: plots/fastflow_performance_real_time.pdf Graphic file (type pdf)
 <use plots/fastflow_performance_real_time.pdf>
-Package pdftex.def Info: plots/fastflow_performance_real_time.pdf  used on input line 304.
+Package pdftex.def Info: plots/fastflow_performance_real_time.pdf  used on input line 342.
 (pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
-<plots/fastflow_speedup_real_time.pdf, id=425, 462.52798pt x 346.89601pt>
+<plots/fastflow_speedup_real_time.pdf, id=507, 462.52798pt x 346.89601pt>
 File: plots/fastflow_speedup_real_time.pdf Graphic file (type pdf)
 <use plots/fastflow_speedup_real_time.pdf>
-Package pdftex.def Info: plots/fastflow_speedup_real_time.pdf  used on input line 307.
+Package pdftex.def Info: plots/fastflow_speedup_real_time.pdf  used on input line 345.
 (pdftex.def)             Requested size: 200.75996pt x 150.57036pt.
-) (/home/giuseppegrieco/Projects/spm/parallel-bfs/report/sections/3.tex) [9 </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_performance_002_time.pdf> </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_speedup_002_time.pdf
+) (/home/giuseppegrieco/Projects/spm/parallel-bfs/report/sections/3.tex [10 </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_performance_002_time.pdf> </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_speedup_002_time.pdf
 
 pdfTeX warning: pdflatex (file /home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_speedup_002_time.pdf): PDF inclusion: multiple pdfs with page group included in a single page
 > </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_performance_real_time.pdf
@@ -791,33 +805,33 @@ pdfTeX warning: pdflatex (file /home/giuseppegrieco/Projects/spm/parallel-bfs/re
 > </home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_speedup_real_time.pdf
 
 pdfTeX warning: pdflatex (file /home/giuseppegrieco/Projects/spm/parallel-bfs/report/plots/fastflow_speedup_real_time.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 68.
- [10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 68.
+>])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 66.
+ [11]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 66.
  (/home/giuseppegrieco/Projects/spm/parallel-bfs/report/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 68.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 68.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 66.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 66.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 39D96C52CD792AD067FBF5431ACB7E0B;1481.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 68.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 66.
  ) 
 Here is how much of TeX's memory you used:
- 17591 strings out of 480906
- 296878 string characters out of 5910771
- 976951 words of memory out of 5000000
- 32879 multiletter control sequences out of 15000+600000
+ 17615 strings out of 480906
+ 297306 string characters out of 5910771
+ 978067 words of memory out of 5000000
+ 32892 multiletter control sequences out of 15000+600000
  541430 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 51i,12n,48p,1248b,1295s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 51i,12n,48p,1253b,1299s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on /home/giuseppegrieco/Projects/spm/parallel-bfs/report/main.pdf (12 pages, 498836 bytes).
+Output written on /home/giuseppegrieco/Projects/spm/parallel-bfs/report/main.pdf (13 pages, 523342 bytes).
 PDF statistics:
- 655 PDF objects out of 1000 (max. 8388607)
- 312 compressed objects within 4 object streams
- 55 named destinations out of 1000 (max. 500000)
- 224 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 740 PDF objects out of 1000 (max. 8388607)
+ 338 compressed objects within 4 object streams
+ 64 named destinations out of 1000 (max. 500000)
+ 234 words of extra memory for PDF output out of 10000 (max. 10000000)
 

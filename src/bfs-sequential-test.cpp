@@ -1,3 +1,20 @@
+/**
+ * Performs a sequential breadth-first search.
+ * 
+ * It takes 3 positional arguments:
+ *  - inputFile      : the path to the graph
+ *  - startingNodeId : integer, the id of the from which the bfs will start
+ *  - labelTarget    : integer, label whose occurrences are to be counted
+ * 
+ * NOTE: this file provides different utilities for testing:
+ *  - compiling with -DTEST repeat the bfs 10 times
+ *  - compiling with -DTIMER collects different times and print them at the end
+ * 
+ * @file    bfs-sequential-test.cpp
+ * @author  Giuseppe Grieco
+ * @version 1.0 22/06/21
+ */
+
 #include <iostream>
 #include <atomic>
 #include <thread>
@@ -44,7 +61,8 @@ int main(int argc, char *argv[]) {
 		long clearTime = 0;
 
         long nodeCounter = 0;
-        long nodeNCounter = 0;]
+        long nodeNCounter = 0;
+        long lvs = 0;
 #endif
     utimer executionTimer("Main thread");
     {
@@ -77,7 +95,7 @@ int main(int argc, char *argv[]) {
 #endif
                 occurrences += currentNode.first == target;
 #if TIMER
-                nodeTimer.restart();
+                bfsTimer.restart();
 #endif
                 for(size_t i = 0; i < currentNode.second.size(); i++) {
                     uint pos = currentNode.second[i];
@@ -88,10 +106,10 @@ int main(int argc, char *argv[]) {
                     visited[pos] = true;
                 }
 #if TIMER
-                ulong neighborhoodTime = nodeTimer.getElapsedTime();
+                ulong neighborhoodTime = bfsTimer.getElapsedTime();
                 if(currentNode.second.size() > 0) {
                     neighborTime += neighborhoodTime  / currentNode.second.size();
-                    nodeNCounter++
+                    nodeNCounter++;
                 }
                 nodeCounter++;
 #endif
@@ -113,14 +131,14 @@ int main(int argc, char *argv[]) {
     }
     executionTimer.print("BFS", executionTimer.getElapsedTime());
 #if TIMER
-    istrTimer.print("Access frontier time     ", accessFrontier);
-    istrTimer.print("Access frontier (avg)    ", accessFrontier / outCounter);
+    bfsTimer.print("Access frontier time     ", accessFrontier);
+    bfsTimer.print("Access frontier (avg)    ", accessFrontier / nodeCounter);
 
-    istrTimer.print("Get current node time    ", getNodeTime);
-    istrTimer.print("Get current node (avg)   ", getNodeTime / outCounter);
+    bfsTimer.print("Get current node time    ", getNodeTime);
+    bfsTimer.print("Get current node (avg)   ", getNodeTime / nodeCounter);
 
-    nodeTimer.print("Neighbor time       ", neighborTime);
-    nodeTimer.print("Neighbor time (avg) ", neighborTime / nodeNCounter);
+    bfsTimer.print("Neighbor time       ", neighborTime);
+    bfsTimer.print("Neighbor time (avg) ", neighborTime / nodeNCounter);
 
     bfsTimer.print("Clear time               ", clearTime);
     bfsTimer.print("Clear time (avg)         ", clearTime / lvs);

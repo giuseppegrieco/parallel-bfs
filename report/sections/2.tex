@@ -2,7 +2,7 @@
 Before going into the details of the solution, let's describe the graphs 
 used for the analysis. The dataset used is a set of synthetic 
 graph generated using the Erdos-Renyi model.
-Therefore, the graph generates $ER(n, p)$ is parametric in $p$ and $n$, whereas $n$ is the number of node and, $p$ can be interpreted formally as the probability
+Therefore, the graph generates $ER(n, p)$ is parametric in $p$ and $n$, whereas $n$ is the number of nodes and $p$ can be interpreted formally as the probability
 of attaching a node regardless the previous realizations.  On the another hand it
 can be seen as the density of the graph. In particular the set used by the experiments
 is composed by four different graphs: $ER(10000, 0.2), ER(10000, 0.4), ER(10000, 0.8), ER(100000, 0.002)$. 
@@ -54,7 +54,7 @@ whereby the frontiers will contain a very large number of nodes.
 \\
 \\
 Ideally, considering $nw$ workers one could think that the analysis of a single
-frontier $L_i$ can be divided equally among the workers, obtaining a parallel
+frontier $F_i$ can be divided equally among the workers, obtaining a parallel
 completion time for a single iteration $T^{par}_{T_i} \approx \frac{T_{L_i}}{nw} + T_{swap} + T_{clear}$. 
 However, this does not take into account that the analysis of
 $L_{i+1}$ can start only when the analysis of $L_{i}$ is terminated,
@@ -67,13 +67,13 @@ as they are in critical section:
 \begin{enumerate}
     \item Checking if a node has already been visited and, in the case it is 
     necessary, updating the vector of visits;
-    \item Adding the nodes found to $L_{i+1}$;
+    \item Adding the nodes found to $F_{i+1}$;
     \item Update the number of occurrences.
 \end{enumerate}
 Lets denote the additional factors listed above with:
  $T_{visited}$ due to 1, $T_{merge}$ due to 2 and $T_{update}$ due to 3.
  The first two are required at each iteration, the last one can be 
- added directly once to $T^{par}$ since each workers
+ added directly once to $T_{par}$ since each workers
  can keep a counter of the found occurrences and at the end sum it.
  The completion time of single iteration in parallel can be better 
  approximated by: $T^{par}_{T_i} \approx \frac{T_{L_i}}{nw} 
@@ -81,7 +81,7 @@ Lets denote the additional factors listed above with:
   + T_{visited} + T_{merge} + T_{swap} + T_{clear}$, resulting in the following 
   parallel completion time: 
   $$
-  T^{par} \approx T_{init} + T_{update} + \sum^{\bar{d}(G)}_{i=1} T^{par}_{T_i}
+  T_{par}(G, nw) \approx T_{init} + T_{update} + \sum^{\bar{d}(G)}_{i=1} T^{par}_{T_i}
   $$
 
 
@@ -90,14 +90,14 @@ Of course the above approximation considers the workload as perfectly balanced,
 that in principle is not easy to achieve, since it is not only
 a matter of the number of nodes (i.e. it is not enough to assign equal-size
 subset of the frontier to each worker). On the other hand, the completion time $T_{S \subseteq L_i}$
-is influenced by the completion time of each node $v \in S$, namely $T_v$. A good scenario at iteration $i$, not necessary the best,
+is influenced by the completion time of each node $v \in S$, namely $T_v$. A necessary condition for the best scenario is that at iteration $i$, not necessary the best,
 is the one where the number of nodes at level $L_{i+1}$ is equally
 distributed among the neighbors of nodes contained in $L_i$.
 \subsubsection{Sequential analysis}
 In order to design a proper parallel solution, 
 the times of the various operations and phases that the sequential
- version requires were measured, to identify where there are, any bottlenecks.
-The expected ones are the memory accesses, more in details:
+ version requires were measured, to identify if there are any bottlenecks.
+The expected ones are the memory accesses, more in detail:
 \begin{itemize}
     \item The time to access an element of the graph contained in the frontier,
     $T_{read(v[i]\in G)}$, that is 
@@ -111,47 +111,49 @@ The expected ones are the memory accesses, more in details:
     the access order is influenced by the organization of the neighborhood 
     of the nodes in $L_i$.
 \end{itemize}
-The accesses to the current frontier $L_i$ and the neighborhood $\mathcal{N}(v)$ are among the memory access 
-the one made more efficiently, since they are a scan from the 
+The accesses to the current frontier $F_i$ and the neighborhood $\mathcal{N}(v)$ are efficient, since they are a scan from the 
 first to the last elements
 of the vector, thus optimal in number of I/Os. Some of
- the measures to support this are presented in Table \ref{tab:seq-meas}\footnote{The results are obtained as an average over 10 runs}, note the time taken by $T_{read(v \in \mathcal{N}(v))}, T_{read(visited[v])}, T_{write(visited[v])}$ were not measured since the sum togheter took at most $\approx 5ns$.
+ the measures to support this are presented in Table \ref{tab:seq-meas}\footnote{The results are obtained as an average over 10 runs}. Note the time taken by $T_{read(v \in \mathcal{N}(v))}$, $T_{read(visited[v])}$, $T_{write(visited[v])}$ were not measured since on average they took at most $\approx 5ns$.
 
 \begin{table}[h]
     \begin{center}
-        \begin{tabular}{|| l | c | c | c ||}
+        \begin{tabular}{|| l | c | c | c | c |}
             \hline
-              & \multicolumn{3}{c||}{p} \\ \cline{2-4}
-              & 0.2 & 0.4 & 0.8 \\ \hline \hline
-             $T_{clear}$  & $\approx 164ns$& $\approx 176ns$& $\approx 167ns$
+            & $ER(10000, 0.2)$ & $ER(10000, 0.4)$ & $ER(10000, 0.8)$ & $ER(100000, 0.002)$ \\ \hline \hline
+             $T_{clear}$  & $\approx 164ns$& $\approx 176ns$& $\approx 167ns$ & $\approx 155ns$
              \\ \hline 
-             $T_{swap}$  & $\approx 154ns$& $\approx 168ns$& $\approx 163ns$
+             $T_{swap}$  & $\approx 154ns$& $\approx 168ns$& $\approx 163ns$ & $\approx 140ns$
              \\ \hline 
-             $T_{read(i \in F_i)}$  & $\approx 160ns$& $\approx 164ns$& $\approx 166ns$
+             $T_{read(i \in F_i)}$  & $\approx 160ns$& $\approx 164ns$ & $\approx 166ns$ & $\approx 150ns$
              \\ \hline 
-             $T_{read(v[i] \in G)}$  & $\approx 1874ns$& $\approx 2837ns$& $\approx 4233ns$
-             \\ \hline
+             $T_{read(v[i] \in G)}$  & $\approx 1874ns$& $\approx 2837ns$& $\approx 4233ns$ & $\approx 771ns$
+             \\ \hline 
+             \hline
         \end{tabular}
     \end{center}
-    \label{tab:seq-meas}
     \caption{Sequential  measurements}
+    \label{tab:seq-meas}
 \end{table}
-As can be observed, as the density increase the time taken by the I/O increases. This happens because the bigger is the vector to read the higher is the number of pages it takes in the upper-level cache, i.e. higher is the number of access to those pages for a scan. The sequential completion 
+As can be observed, as the density increases the time taken by the I/O increases. This happens because the bigger is the vector to read the higher is the number of pages it takes in the upper-level cache, i.e. higher is the number of access to those pages for a scan. The sequential completion 
 times measured is shown in Table \ref{tab:seq-results} as average on 10 runs.
 \begin{table}[!htb]
     \begin{center}
-        \begin{tabular}{|| l | c | c | c ||}
+        \begin{tabular}{|| l | c | c | c | c ||}
             \hline
-              & \multicolumn{3}{c||}{p} \\ \cline{2-4}
-              & 0.2 & 0.4 & 0.8 \\ \hline \hline
-             $\bar{T}_{seq}$ & $94862586ns$ & $126302631ns$ & $243904063ns$ \\ \hline
-             $\sigma(T_{seq})$ & $18246006ns$ & $422329ns$ & $548079ns$ \\ \hline
+              & $ER(10000, 0.2)$ & $ER(10000, 0.4)$ & $ER(10000, 0.8)$ & $ER(100000, 0.002)$ \\ \hline \hline
+             $\bar{T}_{seq}$ & $65ms$ & $126ms$ & $244ms$ & $127ms$ \\ \hline
+             $\sigma(T_{seq})$ & $1ms$ & $422\mu s$ & $548\mu s$ & $399 \mu s$ \\ \hline
             \hline
         \end{tabular}
     \end{center}
-    \label{tab:seq-results}
+    
     \caption{Sequential results}
+    \label{tab:seq-results}
 \end{table}
+
+Considering the results obtained, different scenarios can be explored as interesting for the analysis of the parallel version: for instance a graph having a small number of nodes and fully connected generates a big frontier w.r.t. the number of nodes, although the time needed to process the frontier is too small compared to the overheads of thread creation. Similar scenario happens for processing graph with large number of nodes and really high value of $\bar{d}$ where the frontiers generated in average will be small, thus the overhead in synchronization is expected to exceeds the gain.
+
 \subsection{Solution Description}
 In order to prevent the load balancing issues 
 due to the variance of $k_{out}$, the proposed solution
@@ -161,14 +163,14 @@ present case, an auto-scheduling policy is implemented:  all the workers have ac
 and obtain a new task of work using a shared
 data structure. Retrieving a task has the cost of an
 atomic fetch+add on an integer. Here a task correspond to a chunk, i.e.
- start and end indexes of $F_i$, note that the size of the chunk $cw$,
+ start and end indexes of $F_i$. Note that the size of the chunk $cw$
  is a parameter of the solution. Thanks to this shared data structure
  the master does not need to
  prepare the tasks for the workers. Instead it performs the same work as 
  the worker with the difference that is also responsible for 
  the swap and the cleaning of the new $F_{i+1}$. 
 \subsubsection{Local next frontier}
-The trivial way to produce $F_{i+1}$ is to share an array among the workers and insert in mutually exclusive, each new element found to the array. This solution is as easy as inefficient, since it produces different problems. First of all, false sharing occurs more frequently and the overhead due the atomicity is really high. In the proposed solution each worker has a local version of $F_i$, which contains only the nodes found by the worker at the end of the visit. The worker atomically adds all the elements of the local frontier to the global one. This reduces the number of false sharing and decreases the overhead, since the processing is much faster.  
+The trivial way to produce $F_{i+1}$ is to share an array among the workers and insert each new element in mutual exclusion, each new element found to the array. This solution is as easy as inefficient, since it produces different problems. First of all, false sharing occurs more frequently and the overhead due the atomicity is really high. In the proposed solution each worker has a local version of $F_i$, which contains only the nodes found by the worker at the end of the visit. The worker atomically adds all the elements of the local frontier to the global one. This reduces false sharing and decreases the overhead, since the processing is much faster.  
 \subsubsection{Expected performance}
 \label{sec:how-it-perform}
 The solution mentioned above mitigates, thanks to dynamic scheduling,
@@ -176,29 +178,27 @@ the problems due to the variance of $k_{out}$.
 However, it does not eliminate the
 problem in its entirely, because it remains 
 a parallelism only at the frontier level.
-The worst case is when an huge hub occurs, 
-since the worker who has to process it
-will take much longer. Instead, 
-a good scenario for the algorithm is the one in which
-fairly large frontiers are generated.
+The worst case is when an huge hub occurs: 
+since the worker who has to process it,
+will take much longer.
 \\
 \\
 To discuss with more specificity the expected performance, it is necessary to evaluate it with respect to the topology and statistical properties of the input graph:
 \begin{itemize}
     \item In general, the lower the value of $\bar{d}$ is, the higher the expected gain of the parallel version, because the overhead due to the level-synchronization will be the smaller and, the number of nodes in the frontiers will be higher, since $n$ should be divided among few frontiers.
     \item In addition, fixing $\bar{d}$ and enlarging $n$ increase the probably that some levels will contain a number of nodes high enough to achieve a good speedup increase.
-    \item In addition to the previous property, if the $k_{out}$ is considered, it is possible to better estimate how the frontiers will be made. Namely, as the variance in $k_{out}$ is low, the confidence in the fact the nodes between the frontiers will be better distributed increases. It is not true in general, because actually it depends on which node are presents in the different neighborhood: the fewer are the duplicates among the nodes neighborhood the better distributed the nodes will be across the frontiers.
-    \item Instead, the density itself does not say too much about about the distribution of the nodes among the levels. This is not always true: in fact if we take specific cases like the synthetic dataset generated through the Erdos-Renyi, this is false. This happen because increasing the value of $p$, i.e. the density, the algorithm tends to generate a small number of levels due to independency in drawing random edges: for small value of p the probability of finding node in higher level increases.
+    \item In addition to the previous property, if the $k_{out}$ is considered, it is possible to better estimate how the frontiers will be made. Namely, as the variance in $k_{out}$ is low, the confidence in the fact the nodes between the frontiers will be better distributed increases. This is not true in general, because actually it depends on which node are present in the different neighborhoods: the fewer are the duplicates among the nodes neighborhood the better distributed the nodes will be across the frontiers.
+    \item Instead, the density itself does not say too much about about the distribution of the nodes among the levels, but in some specific case it can helps. For instance the synthetic dataset generated through the Erdos-Renyi increasing the value of $p$, i.e. the density, the algorithm tends to generate a small number of levels due to independency in drawing random edges: for small value of p the probability of finding node in higher level increases.
 
 \end{itemize}
 
-For example in real graphs is known that $n$ is a big number and $\bar{d}$ is really small number. Even though, in real graphs often hub occurs and this generates an high variance in $k_{out}$ and increments the load balancing issue.
+For example, in real graphs it is known that $n$ is a big number and $\bar{d}$ is really small number. Even though in those graphs hubs occurs often and this generates an high variance in $k_{out}$ and increments the load balancing issue.
 
 \subsubsection{The influence of chunksize}
 \label{sec:chunksize}
-As mentioned before the proposed solution is parametric in $cw$, namely the chunksize, this measure refers to the number of nodes of $F_i$ that each workers will consider as a single task. The pop operation is as written in the previous sections with an efficient data structure that implements it at the cost of an atomic \texttt{fetch-add}. The choice of $cw$ value should be a trade-off between the advantage of having small tasking and the time taken by the pop operation. Small chunk size guarantees a more fairly distribution among the workers, as cons it increments the number of pop, hence the overhead. Moreover if the expected variance in $k_{out}$ is high the advantage of having small chunk increase.
+As mentioned before the proposed solution is parametric in $cw$, namely the chunksize, this measure refers to the number of nodes of $F_i$ that each workers will consider as a single task. The pop operation is as written in the previous sections with an efficient data structure that implements it at the cost of an atomic \texttt{fetch-add}. The choice of $cw$ value should be a trade-off between the advantage of having small tasking and the time taken by the pop operation. Small chunk size guarantees a fairer distribution among the workers, as cons it increments the number of pops, hence the overhead. Moreover if the expected variance in $k_{out}$ is high the advantage of having small chunk increase.
 \subsection{Analysis and measurements}
-All the experiments have been performed fixing $cw$ as 32, this number has been chosed according to what is wrote in section \ref{sec:chunksize} observing the overhead better described in section \ref{sec:overhead}.
+All the experiments have been performed fixing $cw$ as 32, this number has been chosed according to what is written in section \ref{sec:chunksize} observing the overhead better described in section \ref{sec:overhead}.
 \subsubsection{Build and execution}
 The source code have been complied with \texttt{g++17} using the commands:
 \begin{itemize}
@@ -225,15 +225,53 @@ the threads and then starts its work as described. As soon as the visit of the g
 is completed the master collects the result and prints it together with the completion time. The synchronization at the end of each level, among the workers and the master, 
 is implemented using an active wait barrier implemented through mutex and conditional variable.
 \\
-To handle the critical section in the check and update of the visited nodes a vector of atomic booleans were used as the vector of visits. The check and update was accomplished via an \texttt{compare and exchange} instruction, which were done at the node level in the frontier, while at the neighborhood level (the one implemented in the sequential version) to avoid inserting duplicates a non-atomic vector of boolean were used, namely the \textit{vector of insertion}. Since the vector of insertion is composed by non-atomic boolean this does not guarantee that duplicates will not be added, but the checks at node level guarantee that the node will not be visited more than once. This were made, since as vector of insertion generates few duplicates in the frontier the checks at node level will have often the same result, hence this helps to exploiting better the pipeline of the new processor through the branch prediction. The probability of adding duplicates grows as the $C(v)$ of the nodes $v$ in the previous frontier increase. A cons of the introduction of this vector is that it increases the probability that false sharing occurs.
+To handle the critical section in the check and update of the visited nodes a vector of atomic booleans was used as the vector of visits. The check and update was accomplished via a \texttt{compare and exchange} instruction, which was done at the node level in the frontier. Meanwhile at the neighborhood level (the one implemented in the sequential version) to avoid inserting duplicates a non-atomic vector of boolean was used, namely the \textit{vector of insertion}. Since the vector of insertion is composed by non-atomic boolean this does not guarantee that duplicates will not be added, but the checks at node level guarantee that the node will not be visited more than once. This was made because the vector of insertion generates few duplicates in the frontier the checks at node level will have often the same result, hence this helps to exploiting better the pipeline of the new processor through the branch prediction. The probability of adding duplicates grows as the $C(v)$ of the nodes $v$ in the previous frontier increase. A downside of the introduction of this vector is that it increases the probability that false sharing occurs. 
 \subsubsection{Overhead analysis}
 \label{sec:overhead}
-To better evaluate the performance as the number of threads increases, it is useful to observe the trend that the overheads show. With this type of analysis it is also possible to make a choice on the effective number of threads to use in case the nature (e.g. using the approximation of the completion time provided in section \ref{sec:comp-time}), intended as topology and statistical properties, of the graph is known. 
+To better evaluate the performance as the number of threads increases, it is useful to observe the trend that the overheads show. With this type of analysis it is also possible to make a choice on the effective number of threads to use in case the nature (e.g. using the approximation of the completion time provided in section \ref{sec:comp-time}), intended as topology and statistical properties, of the graph is known. Two three classes of overhead can be identified: 
+\begin{enumerate} 
+    \item the first class grows linearly in the number of thread, which contains the creation of the threads $\bar{T}_{thd}$.
+    \item the second class grows linearly in the $\bar{d}$ (the number of frontier): the synchronization time and the waiting for the lock, $T_{merge}$.
+    \item the third class instead depends on the size of $F_i$, which contains: the overhead to checks and update atomically, $T_{visit}$, the vector of visits and the one needed to pop a new task, $T_{pop}$.
+\end{enumerate}
+
+\begin{table}[!htb]
+    \begin{center}
+        \begin{tabular}{|| l | c ||}
+            \hline
+             $T_{thd}$ & $130 \mu s$  \\ \hline
+             $T_{visited}$ & $280ns$ \\ \hline
+             $T_{pop}$ & $480ns$ \\ \hline
+            \hline
+        \end{tabular}
+    \end{center}
+    
+
+    \label{tab:static-overhead-results}
+    \caption{Static overhead measurements}
+\end{table}
+
+Even though the synchronization belongs to the second class, its value depends on the number of threads as shown in figure \ref{fig:level-sync}. The same applies to $T_{merge}$, the lock waiting, for which it also depends on the size of the local frontiers. Its trend is non-trivial as shown in figure \ref{fig:lock}: if the number of threads grows the overhead increases, in any case if the generated local frontiers are small as in the case of Erdos-Renyi with low density the growth decreases.
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\textwidth]{plots/level-sync.pdf}
+        \caption{Level-synchronization overheads}
+        \label{fig:level-sync}
+    \end{minipage}
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\textwidth]{plots/lock-wait.pdf}
+        \caption{Lock overheads}
+        \label{fig:lock}
+    \end{minipage}
+\end{figure}
+
 \subsubsection{Fastflow implementation}
-In the \texttt{FastFlow} implementation implements the same mechanisms as in the \texttt{pthread} version, except for the synchronization mechanisms, it uses the Master-Worker with feedback queue. The master after having performed the initialization phase and indicated to the threads which is the pointer to the queue where to write the nodes they find, performs the same work of the workers and orchestrates the level-synchronization. The level-synchronization is implemented throw the task queues and feedback queue, that were use to notify the master with the number of occurrences found in the level. Whenever the master receives all the feedbacks from all the workers, swap the pointers of $L_i$ and $L_{i+1}$ and informs the threads to work on the next level by indicating the new pointers pushing them on the task queues of each worker. Initially to starts the worker the master push the initial pointers on the task queues.
+The \texttt{FastFlow} version implements the same mechanisms as in the \texttt{pthread} version, except for the synchronization mechanisms, since it uses the Master-Worker with feedback queue. The master after having performed the initialization phase and indicated to the threads which is the pointer to the queue where to write the nodes they find, performs the same work of the workers and orchestrates the level-synchronization. The level-synchronization is implemented through the task queues and feedback queue, that were used to notify the master with the number of occurrences found in the level. Whenever the master receives all the feedbacks from all the workers, it swaps the pointers of $F_i$ and $F_{i+1}$ and informs the threads to work on the next level by indicating the new pointers pushing them on the task queues of each worker. Initially to start the worker the master pushes the initial pointers on the task queues.
 \subsubsection{Results}
-The following section reports all the results obtained by both the \texttt{pthread} and the \texttt{FastFlow} implementation. All the synthetic dataset have been exploited in order to show empirically what have been discussed until now. The results have been shown plotting the performance in terms of completion time and speedup reached. The results obtained by the 
-\texttt{FastFlow} version are worse in general than the \texttt{pthread} implementation, the gap with increasing number of threads shows an increasing trend. This gap is probably due to the fact that the \texttt{pthread} version can be more specific and implement the bare minimum in a more efficient way for the specific problem, especially in the synchronization mechanisms. 
+The following section reports all the results obtained by both the \texttt{pthread} and the \texttt{FastFlow} implementation. All the synthetic dataset have been exploited in order to show empirically what has been discussed until now. The results have been shown plotting the performances in terms of completion time and speedup reached. The results obtained by the 
+\texttt{FastFlow} version are worse in general than the \texttt{pthread} implementation. The gap shows an increasing trend as the number of threads grows. This gap is probably due to the fact that the \texttt{pthread} version can be more specific and implement the bare minimum in a more efficient way for the specific problem, especially in the synchronization mechanisms. 
 \\
 As discussed earlier as the number of nodes in the frontiers increases, an increase in speedup is expected. In the Erdos-Renyi model fixed the number of nodes $n$, as $p$ increases we obtain graphs with a smaller number of frontiers, i.e. $\bar{d}$ smaller, and generating very large frontiers. This is well highlighted comparing the different plots in Figures
 \ref{fig:perf_02}, \ref{fig:perf_04} and \ref{fig:perf_08}. Interestingly, as the number of nodes in the frontiers increases and, the number of frontiers decrease (because $n$ is fixed), the gap between the performances of the two versions shows a decreasing trend.
@@ -246,9 +284,9 @@ As discussed earlier as the number of nodes in the frontiers increases, an incre
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{plots/fastflow_speedup_02_time.pdf}
     \end{minipage}
-    \begin{minipage}{1\textwidth}
     \caption{Performance and speedup using ER(10000, 0.2)}
     \label{fig:perf_02}
+    \begin{minipage}{1\textwidth}
     \end{minipage}
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{plots/fastflow_performance_04_time.pdf}
@@ -256,9 +294,9 @@ As discussed earlier as the number of nodes in the frontiers increases, an incre
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\textwidth]{plots/fastflow_speedup_04_time.pdf}
     \end{minipage}
-    \begin{minipage}{1\textwidth}
     \caption{Performance and speedup using ER(10000, 0.4)}
     \label{fig:perf_04}
+    \begin{minipage}{1\textwidth}
     \end{minipage}
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -271,7 +309,7 @@ As discussed earlier as the number of nodes in the frontiers increases, an incre
     \label{fig:perf_08}
 \end{figure}
 
-Moreover, as mentioned in section \ref{sec:how-it-perform} it is not only a matter of density, instead different factors must be taken into account, such as the number of nodes and $\bar{d}$. This is clearly looking at the result obtained in Figure \ref{fig:perf_08} and \ref{fig:real-case}.
+Moreover, as mentioned in section \ref{sec:how-it-perform} it is not only a matter of density, instead different factors must be taken into account, such as the number of nodes and $\bar{d}$. This is clear looking at the result obtained in Figure \ref{fig:perf_08} and \ref{fig:real-case}.
 
 \begin{figure}[h]
     \centering

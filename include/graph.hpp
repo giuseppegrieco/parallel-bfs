@@ -23,12 +23,14 @@ template <class T>
 using Graph = vector<Node<T>>;
 
 /**
-* It reads a run from a given file. A run is composed of a graph and the starting
-* node of the bfs and the label of the node to search
-*
-* @param filePath Even if there is only one possible unified theory. it is just a
-*               set of rules and equations
-*/
+ * It reads a run from a given file. A run is composed of a graph and the starting
+ * node of the bfs and the label of the node to search
+ *
+ * @param filePath Even if there is only one possible unified theory. it is just a
+ *               set of rules and equations
+ *
+ * @return the graph read.
+ */
 template <class T>
 Graph<T> read(string filePath) {
     fstream inputFile(filePath, ios_base::in);

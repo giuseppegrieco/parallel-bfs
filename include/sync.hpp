@@ -11,7 +11,8 @@
 using Chunk = pair<uint, uint>;
 
 /**
- * 
+ * It allows atomically retrieves a chunk
+ * for a given frontier.
  */
 class TaskQueue {
 private:
@@ -30,6 +31,9 @@ public:
         return frontier;
     }
 
+    /**
+     * @return the next chunk to process.
+     */
     pair<uint, uint> pop() {
         uint i = s.fetch_add(k);
         if(i < e) {
@@ -42,6 +46,11 @@ public:
         }
     }
 
+    /**
+     * It resets the variables according to the next frontier.
+     * 
+     * @param nextLevel is a pointer to the next level frontier
+     */
     void setFrontier(vector<uint> *nextLevel) {
         frontier = nextLevel;
         s = 0;
@@ -50,7 +59,8 @@ public:
 };
 
 /**
- * 
+ * It implements the level-synchronization
+ * mechanism
  */
 class LevelSynchronization {
 public:
@@ -62,18 +72,32 @@ public:
       generation(0) {
     }
     
+    /**
+     * It waits until all the workers 
+     * terminated the process of the frontier.
+     */
     void waitWorkers() {
         while(this->wCounter != nw - 1);
     }
 
+    /**
+     * It resets the counter of the workers.
+     */
     void reset() {
         this->wCounter = 0;
     }
 
+    /**
+     * It increments the counter of workers.
+     */
     void increment() {
         this->wCounter++;
     }
 
+    /**
+     * It waits until all the workers and the master
+     * terminated the process of the frontier.
+     */
     void wait() {
         std::unique_lock<std::mutex> lck{mtx};
         auto gen = generation;

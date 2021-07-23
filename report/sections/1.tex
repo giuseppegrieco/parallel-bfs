@@ -11,7 +11,7 @@ acyclic graph. In addition, for the sake of clarity, the notation used is summar
 Let $\mathcal{G} = (V, E)$, $|V| = n$ is the number of node and $|E| = m$ is the number of edges. 
 For all the node $v \in V$:
 \begin{itemize}
-    \item $\mathcal{N}(v) = \{u : (u, v) \in E\}$ is the neighborhood of $v$;
+    \item $\mathcal{N}(v) = \{u : (v, u) \in E\}$ is the neighborhood of $v$;
     \item $k_{in}(v) = |\{e: e=(u, v) \in E\}|$ is the in-degree of $v$;
     \item $k_{out}(v) = |\mathcal{N}(v)|$ is the out-degree of $v$;
     \item $k(v) = k_{in}(v) + k_{out}(v)$ is the degree of $v$.
@@ -41,8 +41,7 @@ more efficient in terms of space complexity.
 In particular, the solution implements a graph $G$ as a vector of nodes.
  The node is a pair, the first component is the label of the node, while the second
  component is the adjacency list containing the indices of the nodes in the graph.
-In addition to mark each node as visited, when needed, a vector of boolean is used
-taking a space complexity of $O(log_2n)$, this vector is called in the report 
+In addition, to mark each node as visited, a vector of boolean is used (having a space complexity of $O(log_2n)$). This vector is called in the report 
 \textit{vector of visits}.
 
  \subsubsection{Sequential version}
